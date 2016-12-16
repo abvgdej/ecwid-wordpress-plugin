@@ -4,8 +4,8 @@ require_once dirname(__FILE__) . '/ecwid_platform.php';
 
 class Ecwid_Api_V3
 {
-	const CLIENT_ID = 'RD4o2KQimiGUrFZc';
-	const CLIENT_SECRET = 'jEPVdcA3KbzKVrG8FZDgNnsY3wKHDTF8';
+	const CLIENT_ID = 'ecwid-wp-plugin-dev';
+	const CLIENT_SECRET = 'inE7pFUzxDTsGpBWudQCC6GKemkCzuxq';
 
 	const TOKEN_OPTION_NAME = 'ecwid_oauth_token';
 
