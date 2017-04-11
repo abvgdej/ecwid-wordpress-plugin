@@ -944,11 +944,16 @@ function ecwid_is_applicable_escaped_fragment() {
 
 function ecwid_meta_description() {
 
-	if (!ecwid_is_applicable_escaped_fragment()) {
-		return;
+	$params = array();
+
+	if ( ecwid_is_applicable_escaped_fragment() ) {
+		$params = ecwid_parse_escaped_fragment( $_GET['_escaped_fragment_'] );
+	} else if ( Ecwid_Seo_Links::is_product_browser_page() ) {
+		$params = Ecwid_Seo_Links::maybe_extract_html_catalog_params();
 	}
 
-	$params = ecwid_parse_escaped_fragment($_GET['_escaped_fragment_']);
+	if ( empty( $params ) ) return;
+
     $api = ecwid_new_product_api();
     if ($params['mode'] == 'product') {
         $product = $api->get_product($params['id']);
@@ -1062,12 +1067,15 @@ function ecwid_seo_title_parts($parts)
 
 function _ecwid_get_seo_title()
 {
+	$params = array();
 
-	if (!ecwid_is_applicable_escaped_fragment()) {
-		return;
+	if ( ecwid_is_applicable_escaped_fragment() ) {
+		$params = ecwid_parse_escaped_fragment( $_GET['_escaped_fragment_'] );
+	} else if ( Ecwid_Seo_Links::is_product_browser_page() ) {
+		$params = Ecwid_Seo_Links::maybe_extract_html_catalog_params();
 	}
 
-	$params = ecwid_parse_escaped_fragment($_GET['_escaped_fragment_']);
+	if ( empty( $params ) ) return;
 
 	$ecwid_seo_title = '';
 

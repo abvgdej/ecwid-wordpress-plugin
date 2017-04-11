@@ -139,6 +139,34 @@ class Ecwid_Seo_Links {
 JS;
 	}
 
+	public static function maybe_extract_html_catalog_params() {
+
+		$current_url = add_query_arg();
+		$matches = array();
+		if ( !preg_match( self::_get_pb_preg_pattern(), $current_url, $matches ) ) {
+			return false;
+		}
+
+		$modes = array(
+			'p' => 'product',
+			'c' => 'category'
+		);
+
+		return array( 'mode' => $modes[$matches[1]], 'id' => $matches[2] );
+	}
+
+	public static function is_product_browser_page( $url = '' ) {
+		if (!$url) {
+			$url = add_query_arg();
+		}
+
+		return preg_match( self::_get_pb_preg_pattern(), $url );
+	}
+
+	protected static function _get_pb_preg_pattern() {
+		return $pattern = '!.*-(p|c)([0-9]*)!';
+	}
+
 	public function build_rewrite_rules( $original_rules ) {
 
 		if ( !self::is_enabled() ) return $original_rules;
