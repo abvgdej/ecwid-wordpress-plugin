@@ -141,10 +141,10 @@ JS;
 
 	public static function maybe_extract_html_catalog_params() {
 
-		$current_url = add_query_arg();
+		$current_url = add_query_arg( null, null );
 		$matches = array();
 		if ( !preg_match( self::_get_pb_preg_pattern(), $current_url, $matches ) ) {
-			return false;
+			return array();
 		}
 
 		$modes = array(
@@ -155,9 +155,9 @@ JS;
 		return array( 'mode' => $modes[$matches[1]], 'id' => $matches[2] );
 	}
 
-	public static function is_product_browser_page( $url = '' ) {
+	public static function is_product_browser_url( $url = '' ) {
 		if (!$url) {
-			$url = add_query_arg();
+			$url = add_query_arg( null, null );
 		}
 
 		return preg_match( self::_get_pb_preg_pattern(), $url );

@@ -947,7 +947,7 @@ function ecwid_meta_description() {
 
 	if ( ecwid_is_applicable_escaped_fragment() ) {
 		$params = ecwid_parse_escaped_fragment( $_GET['_escaped_fragment_'] );
-	} else if ( Ecwid_Seo_Links::is_product_browser_page() ) {
+	} else if ( Ecwid_Seo_Links::is_product_browser_url() ) {
 		$params = Ecwid_Seo_Links::maybe_extract_html_catalog_params();
 	}
 
@@ -1070,7 +1070,7 @@ function _ecwid_get_seo_title()
 
 	if ( ecwid_is_applicable_escaped_fragment() ) {
 		$params = ecwid_parse_escaped_fragment( $_GET['_escaped_fragment_'] );
-	} else if ( Ecwid_Seo_Links::is_product_browser_page() ) {
+	} else if ( Ecwid_Seo_Links::is_product_browser_url() ) {
 		$params = Ecwid_Seo_Links::maybe_extract_html_catalog_params();
 	}
 
