@@ -21,6 +21,7 @@ class Ecwid_Seo_Links {
 
 			add_filter( 'redirect_canonical', array( $this, 'redirect_canonical' ), 10, 2 );
 			add_action( 'template_redirect', array( $this, 'redirect_escaped_fragment' ) );
+			add_filter( 'get_shortlink', array( $this, 'get_shortlink' ) );
 
 			add_action( 'ecwid_print_inline_js_config', array( $this, 'add_js_config') );
 
@@ -66,6 +67,14 @@ class Ecwid_Seo_Links {
 			}
 		}
 	}
+
+	public function get_shortlink( $shortlink ) {
+		if ( self::is_product_browser_url() ) {
+			return '';
+		}
+
+		return $shortlink;
+ 	}
 
 	public function is_post_slug_bad( $value, $slug, $type = '', $parent = '' ) {
 
