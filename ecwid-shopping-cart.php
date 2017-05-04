@@ -785,14 +785,12 @@ function ecwid_invalidate_cache()
 		$stats = $api->get_store_update_stats();
 
 		if ($stats) {
-			$api->invalidate_products_cache_from(strtotime($stats->productsUpdated));
-			$api->invalidate_categories_cache_from(strtotime($stats->categoriesUpdated));
+			EcwidPlatform::invalidate_products_cache_from(strtotime($stats->productsUpdated));
+			EcwidPlatform::invalidate_categories_cache_from(strtotime($stats->categoriesUpdated));
 		}
 
 	}
 }
-
-
 
 function add_ecwid_admin_bar_node() {
 	global $wp_admin_bar;
