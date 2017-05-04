@@ -770,7 +770,7 @@ function ecwid_admin_check_api_cache()
 {
 	$last_cache = get_option('ecwid_admin_last_api_cache_check');
 
-	if (time() - $last_cache > HOUR_IN_SECONDS ) {
+	if (time() - $last_cache > MINUTE_IN_SECONDS * 5 ) {
 		ecwid_invalidate_cache();
 	}
 
