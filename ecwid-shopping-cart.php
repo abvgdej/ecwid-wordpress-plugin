@@ -5,7 +5,7 @@ Plugin URI: http://www.ecwid.com?source=wporg
 Description: Ecwid is a free full-featured shopping cart. It can be easily integrated with any Wordpress blog and takes less than 5 minutes to set up.
 Text Domain: ecwid-shopping-cart
 Author: Ecwid Team
-Version: 5.1
+Version: 5.1.1
 Author URI: http://www.ecwid.com?source=wporg
 */
 
@@ -589,11 +589,8 @@ function ecwid_check_version()
 
 		do_action( 'ecwid_on_plugin_update' );
 
-		Ecwid_Store_Page::add_store_page(
-			array(
-				get_option('ecwid_store_page_id'), get_option('ecwid_store_page_id_auto')
-			)
-		);
+		Ecwid_Store_Page::add_store_page( get_option('ecwid_store_page_id') );
+		Ecwid_Store_Page::add_store_page( get_option('ecwid_store_page_id_auto') );
 
 		if (Ecwid_Store_Page::get_current_store_page_id()) {
 			delete_option('ecwid_store_page_id_auto');
