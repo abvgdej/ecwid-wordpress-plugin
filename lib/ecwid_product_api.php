@@ -108,18 +108,18 @@ class EcwidProductApi {
 
 		function get_product_https($product_id) {
 
-			static $cached;
-
 			$product_id = intval($product_id);
 
-			if (isset($cached[$product_id])) {
-				return $cached[$product_id];
+			$api_url = $this->ECWID_PRODUCT_API_ENDPOINT_HTTPS . "/" . $this->store_id . "/product?id=" . $product_id;
+
+			$result = EcwidPlatform::get_from_products_cache($api_url);
+			if (!$result) {
+
+				$result = $this->process_request($api_url);
+				EcwidPlatform::store_in_products_cache($api_url, $result);
 			}
 
-			$api_url = $this->ECWID_PRODUCT_API_ENDPOINT_HTTPS . "/" . $this->store_id . "/product?id=" . $product_id;
-			$cached[$product_id] = $this->process_request($api_url);
-
-			return $cached[$product_id];
+			return $result;
 		}
 
 
