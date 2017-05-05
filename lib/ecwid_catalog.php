@@ -22,7 +22,8 @@ class EcwidCatalog
 			array("alias" => "pf", "action" => "profile")
 		);
 
-		$batch_result = EcwidPlatform::get_from_categories_cache( json_encode($params) );
+		$batch_result = EcwidPlatform::get_from_products_cache( json_encode($params) );
+
 		if ( !$batch_result ) {
 			$batch_result = $this->ecwid_api->get_batch_request($params);
 			EcwidPlatform::store_in_products_cache(json_encode($params), $batch_result);
