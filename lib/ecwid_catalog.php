@@ -22,12 +22,7 @@ class EcwidCatalog
 			array("alias" => "pf", "action" => "profile")
 		);
 
-		$batch_result = EcwidPlatform::get_from_products_cache( json_encode($params) );
-
-		if ( !$batch_result ) {
-			$batch_result = $this->ecwid_api->get_batch_request($params);
-			EcwidPlatform::store_in_products_cache(json_encode($params), $batch_result);
-		}
+		$batch_result = $this->ecwid_api->get_batch_request($params);
 
 		$product = $batch_result["p"];
 		$profile = $batch_result["pf"];
@@ -201,12 +196,7 @@ class EcwidCatalog
 			$params[] = array('alias' => 'category', "action" => "category", "params" => array("id" => $id));
 		}
 
-		$batch_result = EcwidPlatform::get_from_products_cache( json_encode($params) );
-		if ( !$batch_result ) {
-			$batch_result = $this->ecwid_api->get_batch_request($params);
-
-			EcwidPlatform::store_in_products_cache(json_encode($params), $batch_result);
-		}
+		$batch_result = $this->ecwid_api->get_batch_request($params);
 
 		$category	 = $id > 0 ? $batch_result['category'] : null;
 		$categories = $batch_result["c"];
