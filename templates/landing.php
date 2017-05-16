@@ -51,10 +51,12 @@
             <div class="button-description-mobile on-error ecwid-connection-error">
                 <?php printf( __( 'Connection error: please click the button again and give permissions for this plugin<br /> to show your %s store on this site.', 'ecwid-shopping-cart' ), Ecwid_Config::get_brand() ); ?>
             </div>
+	        <?php if ( ! Ecwid_Config::is_wl() ) : ?>
             <div class="create-store-have-account ecwid-button-description">
                 <span class="create-store-have-account-question"><?php printf( __( 'Already have %s account?', 'ecwid-shopping-cart'), Ecwid_Config::get_brand() ); ?></span>
                 <a class="create-store-have-account-link" href="admin-post.php?action=ec_connect"><?php _e('Connect your store to Wordpress site', 'ecwid-shopping-cart'); ?></a>
             </div>
+            <?php endif; ?>
             <div class="button-description-mobile">
                 <?php printf( __( 'You will be asked to log in to your %s Control Panel<br />and give permissions to show your store on this site', 'ecwid-shopping-cart'), Ecwid_Config::get_brand() ); ?>
             </div>
@@ -143,6 +145,7 @@
 			        <?php printf( __( 'Create Free %s Store', 'ecwid-shopping-cart'), Ecwid_Config::get_brand() ); ?>
 		        <?php endif; ?>
             </button>
+
             <button class="create-store-loading btn btn-primary btn-large btn-loading">
                 <div class="loader">
                     <div class="ecwid-spinner spin-right">
@@ -168,10 +171,12 @@
                 <?php _e('Preparing your store dashboard', 'ecwid-shopping-cart'); ?>
             </div>
 
+	        <?php if ( ! Ecwid_Config::is_wl() ) : ?>
             <div class="ecwid-button-description">
                 <?php printf( __( 'Already have %s account?', 'ecwid-shopping-cart'), Ecwid_Config::get_brand() ); ?>
                 <a href="admin-post.php?action=ec_connect"><?php _e('Connect your store to this site', 'ecwid-shopping-cart'); ?></a>
             </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
