@@ -119,6 +119,7 @@ class Ecwid_Config {
 				$data = json_decode( $result['body'] );
 
 				ecwid_update_store_id( $data->id );
+				update_option( 'ecwid_oauth_scope', 'read_profile read_catalog allow_sso create_customers public_storefront' );
 
 				$api->save_token( $data->token );
 			}
