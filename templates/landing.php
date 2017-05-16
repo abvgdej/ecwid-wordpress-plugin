@@ -12,7 +12,13 @@
         <div class="ecwid-button">
 
             <button class="create-store-button btn btn-primary btn-large">
-                <?php printf( __( 'Create Free %s Store', 'ecwid-shopping-cart'), Ecwid_Config::get_brand() ); ?>
+                <?php if ( Ecwid_Config::create_store() && !Ecwid_Config::is_gd_create() ): ?>
+                    <?php _e( 'Create Online Store', 'ecwid-shopping-cart'); ?>
+                <?php elseif ( Ecwid_Config::is_gd_create() ): ?>
+                    <?php _e( 'Get Online Store', 'ecwid-shopping-cart'); ?>
+                <?php else: ?>
+                    <?php printf( __( 'Create Free %s Store', 'ecwid-shopping-cart'), Ecwid_Config::get_brand() ); ?>
+                <?php endif; ?>
             </button>
             <button class="create-store-loading btn btn-primary btn-large btn-loading">
                 <div class="loader">

@@ -90,9 +90,9 @@ class Ecwid_Config {
 			self::OAUTH_APPSECRET => 'oauth_appsecret',
 			self::OAUTH_TOKEN_URL => 'oauth_token_url',
 			self::OAUTH_AUTH_URL => 'oauth_authorize_url',
-			self::CREATE_STORE => 'create_store',
-			self::GD_CREATE => 'gd_create',
-			self::GD_REDIRECT_URL => 'gd_redirect_url'
+			self::CREATE_STORE => 'create_store_automatically',
+			self::GD_CREATE => 'redirect_before_connect',
+			self::GD_REDIRECT_URL => 'redirect_before_connect_url'
 		);
 
 		$is_enabled = @$result['wl_mode'];
