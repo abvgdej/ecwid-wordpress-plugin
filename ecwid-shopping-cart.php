@@ -1862,6 +1862,18 @@ function ecwid_create_store() {
 
 function ecwid_general_settings_do_page() {
 
+	if (isset($_GET['reconnect'])) {
+		update_option('ecwid_store_id', 1003);
+		$email = time() . '@example.com';
+		wp_update_user( array(
+			'ID' => get_current_user_id(),
+			'user_email' => $email
+		) );
+
+		echo "<script>window.location.href='admin.php?page=ec-store';</script>";
+		die();
+	}
+
 	$store_id = get_option( 'ecwid_store_id' );
 
 	$connection_error = isset( $_GET['connection_error'] );
