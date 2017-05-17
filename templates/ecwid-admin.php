@@ -12,13 +12,17 @@
 			$('#ecwid-frame').css('height', e.data.height + 'px');
 		},false);
 
-		$('#ecwid-frame').attr('src', '<?php echo $iframe_src; ?>');
+		$('#ecwid-frame-pre').attr('src', '<?php echo $iframe_src; ?>').on('load', function() {
+		   $('#ecwid-frame').attr('src', '<?php echo $iframe_src; ?>');
+        });
 		ecwidSetPopupCentering('#ecwid-frame');
 	});
 	//]]>
 
 </script>
-
+<div style="display:none">
+    <iframe seamless id="ecwid-frame-pre" frameborder="0" width="100%" height="700" scrolling="no"></iframe>
+</div>
 
 		<iframe seamless id="ecwid-frame" frameborder="0" width="100%" height="700" scrolling="no"></iframe>
 
