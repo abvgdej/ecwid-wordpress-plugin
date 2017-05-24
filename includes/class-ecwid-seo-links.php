@@ -7,11 +7,11 @@ class Ecwid_Seo_Links {
 
 	public function __construct()
 	{
-		// therefore the action must me registered
 		add_action( 'init', array( $this, 'build_rewrite_rules' ) );
 
 		add_action( 'init', array( $this, 'init' ) );
 		add_action( 'ecwid_on_fresh_install', array( $this, 'on_fresh_install' ) );
+		add_action( 'wp_nav_menu_objects', array( $this, 'nav_menu_objects' ) );
 	}
 
 	public function init() {
@@ -28,6 +28,47 @@ class Ecwid_Seo_Links {
 			add_filter( 'wp_unique_post_slug_is_bad_flat_slug', array( $this,  'is_post_slug_bad' ), 10, 2 );
 			add_filter( 'wp_unique_post_slug_is_bad_attachment_slug', array( $this,  'is_post_slug_bad' ), 10, 2 );
 		}
+	}
+
+	public function nav_menu_objects($objects) {
+		$current_page_data = self::_match_url_against_ecwid_catalog_seo_link();
+
+		if ( !empty( $current_page_data ) ) {
+
+			$we_have_menu_for_this_item = false;
+			$id  = get_the_ID();
+
+			foreach ( $objects as $object ) {
+				$that_page_data = self::_match_url_against_ecwid_catalog_seo_link( $object->url );
+
+				if ( $that_page_data
+				     && $that_page_data[1] == $current_page_data[1]
+				     && $that_page_data[2] == $current_page_data[2] ) {
+					$we_have_menu_for_this_item = true;
+					break;
+				}
+			}
+
+			if ( $we_have_menu_for_this_item ) {
+				foreach ( $objects as $object ) {
+					if ( $object->object_id == $id && $object->object == 'page' && $object->current ) {
+						$object->current = false;
+						$ind = array_search( 'current-menu-item', $object->classes );
+						if ($ind) {
+							unset( $object->classes[$ind] );
+						}
+						$ind = array_search( 'current_page_item', $object->classes );
+						if ($ind) {
+							unset( $object->classes[$ind] );
+						}
+
+						break;
+					}
+				}
+			}
+		}
+
+		return $objects;
 	}
 
 	public function on_fresh_install() {
@@ -155,9 +196,8 @@ JS;
 
 	public static function maybe_extract_html_catalog_params() {
 
-		$current_url = add_query_arg( null, null );
-		$matches = array();
-		if ( !preg_match( self::_get_pb_preg_pattern(), $current_url, $matches ) ) {
+		$matches = self::_match_url_against_ecwid_catalog_seo_link();
+		if ( !$matches ) {
 			return array();
 		}
 
@@ -167,6 +207,20 @@ JS;
 		);
 
 		return array( 'mode' => $modes[$matches[1]], 'id' => $matches[2] );
+	}
+
+	protected static function _match_url_against_ecwid_catalog_seo_link( $url = null )
+	{
+		if ( is_null( $url ) ) {
+			$url = add_query_arg( null, null );
+		}
+
+		$matches = array();
+		if ( !preg_match( self::_get_pb_preg_pattern(), $url, $matches ) ) {
+			return array();
+		}
+
+		return $matches;
 	}
 
 	public static function is_product_browser_url( $url = '' ) {
