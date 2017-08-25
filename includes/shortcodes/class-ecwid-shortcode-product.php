@@ -92,7 +92,7 @@ class Ecwid_Shortcode_Product extends Ecwid_Shortcode_Base {
 	protected function _get_widget_parts_v1() {
 		return array(
 			'display_items' => array(
-				'picture'  => '<div itemprop="picture"></div>',
+				'picture'  => '<div itemprop="image"></div>',
 				'title'    => '<div class="ecwid-title" itemprop="title"></div>',
 				'price'    => '<div itemtype="http://schema.org/Offer" itemscope itemprop="offers">'
 				              . '<div class="ecwid-productBrowser-price ecwid-price" itemprop="price"></div>'
@@ -108,49 +108,77 @@ class Ecwid_Shortcode_Product extends Ecwid_Shortcode_Base {
 	}
 
 	protected function _get_widget_parts_v2() {
-		$price_location_attributes = '  data-spw-price-location="button"';
+		
+		$product = Ecwid_Product::get_by_id( $this->params['id'] );
+		
+		// Static
+		$result = array(
+			'display_items' => array(
+				'picture'  => '<div itemprop="image"></div>',
+				'options'  => '<div customprop="options"></div>',
+				'qty' 	   => '<div customprop="qty"></div>',
+				'addtobag' => '<div customprop="addtobag"></div>'
+			)
+		);
 
+		// Opening div classes & stuff
 		$main_div_classes = array(
-		    'ecwid',
-            'ecwid-SingleProduct-v2',
-            'ecwid-Product',
-            'ecwid-Product-' . $this->params['id']
-        );
+			'ecwid',
+			'ecwid-SingleProduct-v2',
+			'ecwid-Product',
+			'ecwid-Product-' . $this->params['id']
+		);
 
 		if ($this->params['show_border'] != 0) { // defaults to 1
-			$bordered_class = '';
 			$main_div_classes[] = 'ecwid-SingleProduct-v2-bordered';
 		}
 
 		if ($this->params['center_align'] == 1) { // defaults to 0
-		    $main_div_classes[] = 'ecwid-SingleProduct-v2-centered';
-        }
-
-        $main_div_class = implode( ' ', $main_div_classes );
-
-		if ($this->params['show_price_on_button'] == 0) { // defaults to 1
-			$price_location_attributes = '';
+			$main_div_classes[] = 'ecwid-SingleProduct-v2-centered';
 		}
 
-		return array(
-			'display_items' => array(
-				'picture'  => '<div itemprop="picture"></div>',
-				'title'    => '<div class="ecwid-title" itemprop="title"></div>',
-				'price'    => '<div itemtype="http://schema.org/Offer" itemscope itemprop="offers">'
-				              . '<div class="ecwid-productBrowser-price ecwid-price" itemprop="price"' . $price_location_attributes . '>'
-				              . '<div itemprop="priceCurrency"></div>'
-				              . '</div>'
-				              . '</div>',
-				'options'  => '<div customprop="options"></div>',
-				'qty' 	   => '<div customprop="qty"></div>',
-				'addtobag' => '<div customprop="addtobag"></div>'
-			),
-			'opening_div' => sprintf('<div class="' . $main_div_class . '" '
-			                         . 'itemscope itemtype="http://schema.org/Product" data-single-product-id="%d" id="%s">',
-									$this->params['id'],
-									$this->get_html_id()
-			)
+		$main_div_class = implode( ' ', $main_div_classes );
+
+		$result['opening_div'] = sprintf('<div class="' . $main_div_class . '" '
+			. 'itemscope itemtype="http://schema.org/Product" data-single-product-id="%d" id="%s">',
+			$this->params['id'],
+			$this->get_html_id()
 		);
+
+		// Title
+		$title_content_code = '';
+		if ( $product && isset( $product->name ) ) {
+			$title_content_code = ' content="' . esc_attr( $product->name ) . '"';
+		}
+
+		$result['display_items']['title'] = '<div class="ecwid-title" itemprop="title"' . $title_content_code . '></div>';
+
+		
+		// Price & currency
+		$price_attributes = ' data-spw-price-location="button"';
+		$currency_attributes = ''; 
+		
+		if ($this->params['show_price_on_button'] == 0) { // defaults to 1
+			$price_attributes = '';
+		}
+		
+		if ( isset( $product->price ) ) {
+			$price_attributes .= ' content="' . $product->price . '"';
+		}
+		
+		$api = new Ecwid_Api_V3();
+		$profile = $api->get_store_profile();
+		if ( $profile && isset( $profile->formatsAndUnits ) && isset( $profile->formatsAndUnits->currency ) ) {
+			$currency_attributes .= ' content="' . $profile->formatsAndUnits->currency . '"';
+		}
+
+		$result['display_items']['price'] = '<div itemtype="http://schema.org/Offer" itemscope itemprop="offers">'
+		. '<div class="ecwid-productBrowser-price ecwid-price" itemprop="price"' . $price_attributes . '>'
+		. '<div itemprop="priceCurrency"' . $currency_attributes . '></div>'
+		. '</div>'
+		. '</div>';
+		
+		return $result;
 	}
 
 
