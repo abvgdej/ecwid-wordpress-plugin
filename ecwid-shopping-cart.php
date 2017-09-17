@@ -93,6 +93,7 @@ if ( is_admin() ){
 	add_filter('tiny_mce_before_init', 'ecwid_tinymce_init');
 	add_action('admin_post_ecwid_get_debug', 'ecwid_get_debug_file');
 	add_action('admin_init', 'ecwid_admin_check_api_cache');
+	add_filter('admin_body_class', 'ecwid_admin_body_class');
 } else {
   add_shortcode('ecwid_script', 'ecwid_script_shortcode');
   add_action('init', 'ecwid_backward_compatibility');
@@ -883,6 +884,13 @@ TEXT;
 
 	$body = __($body, 'ecwid-shopping-cart');
 	$body = sprintf($body, Ecwid_Config::get_brand(), $theme, $store_url);
+
+
+	$wp_admin_bar->add_menu( array(
+		'id' => 'ecwid-menu-collapse',
+		'title' => '<span class="ab-icon" id="ecwid-menu-collapse">asdasd</span>',
+	));
+
 
 	$wp_admin_bar->add_menu( array(
 		'id' => 'ecwid-main',
@@ -2017,6 +2025,15 @@ function ecwid_get_iframe_src($time, $page) {
 		$page,
 		substr( $lang, 0, 2 )
 	);
+}
+
+function ecwid_admin_body_class($classes) {
+	
+	if (get_current_screen()->base == 'toplevel_page_ec-store') {
+		$classes .= 'ecwid-admin-body';
+	}
+
+	return $classes;
 }
 
 function ecwid_admin_do_page( $page ) {
