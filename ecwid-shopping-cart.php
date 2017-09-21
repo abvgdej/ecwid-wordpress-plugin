@@ -55,6 +55,8 @@ if ( is_admin() ) {
 	require_once ECWID_PLUGIN_DIR . 'includes/class-ecwid-help-page.php';
 }
 
+require_once ECWID_PLUGIN_DIR . 'includes/class-ecwid-customizer.php';
+
 require_once ECWID_PLUGIN_DIR . 'includes/class-ecwid-nav-menus.php';
 require_once ECWID_PLUGIN_DIR . 'includes/class-ecwid-ajax-defer-renderer.php';
 
@@ -1469,7 +1471,11 @@ function ecwid_shortcode($attributes)
 	$attributes['is_ecwid_shortcode'] = true;
 
 	$result = '';
-
+	
+	if (is_customize_preview()) {
+		$result = '<div id="ecwid-shopping-cart-shortcode">';
+	}
+	
 	$widgets_order = array('minicart', 'search', 'categories', 'productbrowser');
 	foreach ($widgets_order as $widget) {
 		if (in_array($widget, $widgets)) {
@@ -1488,6 +1494,10 @@ function ecwid_shortcode($attributes)
 
 	update_option('ecwid_store_shortcode_used', time());
 
+	if (is_customize_preview()) {
+		$result .= '</div>';
+	}
+	
 	return $result;
 }
 
