@@ -55,7 +55,7 @@ class Ecwid_Static_Home_Page {
 		if ( Ecwid_Seo_Links::is_enabled() && Ecwid_Seo_Links::is_product_browser_url() ) {
 			return null;
 		}
-
+		
 		$data = self::_maybe_fetch_data();
 		
 		if ( $data ) {
@@ -79,7 +79,7 @@ class Ecwid_Static_Home_Page {
 			$params['base_url'] = get_permalink();
 		}
 		
-		if ( $store_page_params['default_category_id'] ) {
+		if ( isset( $store_page_params['default_category_id'] ) ) {
 			$params['default_category_id'] = $store_page_params['default_category_id'];
 		}
 		
@@ -103,7 +103,7 @@ class Ecwid_Static_Home_Page {
 		}
 		
 		$cached_data = EcwidPlatform::get_from_catalog_cache( $url );
-
+		
 		if ( $cached_data ) {
 			return $cached_data;
 		}
