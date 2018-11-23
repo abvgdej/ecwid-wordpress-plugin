@@ -40,9 +40,10 @@ class Ecwid_Shortcode_ProductBrowser extends Ecwid_Shortcode_Base {
 
 		$code .= '<div id="dynamic-ecwid">' . $default_render . '</div>';
 
+		$default_category_id = (int)@$this->_params['defaultCategoryId'];
 		$code .= <<<HTML
 <script language="JavaScript">
-    EcwidStaticPageLoader.processStaticHomePage('static-ecwid', 'dynamic-ecwid');
+    EcwidStaticPageLoader.processStaticHomePage('static-ecwid', 'dynamic-ecwid', '$default_category_id');
 	if ( location.hash != '' ) {
 	    EcwidStaticPageLoader.switchToDynamicMode();
 	}

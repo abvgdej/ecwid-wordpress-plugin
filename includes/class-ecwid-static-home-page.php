@@ -79,6 +79,10 @@ class Ecwid_Static_Home_Page {
 			$params['base_url'] = get_permalink();
 		}
 		
+		if ( $store_page_params['default_category_id'] ) {
+			$params['default_category_id'] = $store_page_params['default_category_id'];
+		}
+		
 		foreach ( Ecwid_Product_Browser::get_attributes() as $attribute ) {
 			$name = $attribute['name'];
 			if ( @$attribute['is_storefront_api'] && isset( $store_page_params[$name] ) ) {
@@ -93,12 +97,13 @@ class Ecwid_Static_Home_Page {
 		}
 		
 		$url = 'https://storefront.ecwid.com/home-page/' . get_ecwid_store_id() . '/static-code?';
+		
 		foreach ( $params as $name => $value ) {
 			$url .= $name . '=' . urlencode( $value ) . '&'; 
 		}
 		
 		$cached_data = EcwidPlatform::get_from_catalog_cache( $url );
-		
+
 		if ( $cached_data ) {
 			return $cached_data;
 		}
@@ -106,7 +111,7 @@ class Ecwid_Static_Home_Page {
 		$fetched_data = null;
 		
 		$fetched_data = EcwidPlatform::fetch_url( $url, array( 'timeout' => 3 ) );
-		
+
 		if ( $fetched_data && @$fetched_data['data'] ) {
 
 			$fetched_data = @json_decode( $fetched_data['data'] );
