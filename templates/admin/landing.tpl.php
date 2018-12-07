@@ -16,11 +16,11 @@
                         for&nbsp;WordPress
                     </h1>
                     <div class="vertical-header__descr">Try selling online for&nbsp;free</div>
-                    <div class="vertical-header__buttons btn-block in-view">      <a href="https://my.ecwid.com/#register" class="btn btn-blue btn-large">Get started</a></div>
+                    <div class="vertical-header__buttons btn-block in-view"> <a href="https://my.ecwid.com/#register" class="btn btn-blue btn-large">Get started</a></div>
                     <div class="vertical-header__small-text">No&nbsp;credit card required</div>
                 </div>
                 <div class="vertical-header__img">
-                    <div class="vertical-header__img-wrap">      <img class="animation-element slide-left in-view" src="https://don16obqbay2c.cloudfront.net/wp-content/themes/ecwid/images/wordpress-main-2x.png" alt="E-commerce for WordPress" srcset=""></div>
+                    <div class="vertical-header__img-wrap"> <img class="animation-element slide-left in-view" src="https://don16obqbay2c.cloudfront.net/wp-content/themes/ecwid/images/wordpress-main-2x.png" alt="E-commerce for WordPress" srcset=""></div>
                 </div>
             </div>
         </div>
@@ -58,8 +58,8 @@
                         <div><a href="https://my.ecwid.com/#register" class="btn btn-blue btn-large">Get started</a></div>
                     </div>
                 </div>
-                <div class="vertical-tile__image vertical-tile__child vertical-tile__image--desktop">      <img src="https://don16obqbay2c.cloudfront.net/wp-content/themes/ecwid/images/wordpress-main2-2x.png" alt="" class="animation-element  slide-right  in-view"></div>
-                <div class="vertical-tile__image vertical-tile__image--mobile vertical-tile__child">      <img src="https://don16obqbay2c.cloudfront.net/wp-content/themes/ecwid/images/wordpress-main2-1x.png" alt="" class="in-view"></div>
+                <div class="vertical-tile__image vertical-tile__child vertical-tile__image--desktop"> <img src="https://don16obqbay2c.cloudfront.net/wp-content/themes/ecwid/images/wordpress-main2-2x.png" alt="" class="animation-element  slide-right  in-view"></div>
+                <div class="vertical-tile__image vertical-tile__image--mobile vertical-tile__child"> <img src="https://don16obqbay2c.cloudfront.net/wp-content/themes/ecwid/images/wordpress-main2-1x.png" alt="" class="in-view"></div>
             </div>
         </div>
     </div>
@@ -77,7 +77,7 @@
                     </div>
                     <div class="fb-integration__text">
                         <div>
-                     <span class="icon">
+                            <span class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
                            <g fill="none" fill-rule="evenodd">
                               <path d="M0 0h80v80H0z"></path>
@@ -85,10 +85,11 @@
                            </g>
                         </svg>
                      </span>
-                            <b>Sell where your customers are</b><br>Start selling on&nbsp;your WordPress site and&nbsp;continue on&nbsp;  Instagram, Facebook, eBay, Amazon, Google Shopping and&nbsp;more
+                            <b>Sell where your customers are</b>
+                            <br>Start selling on&nbsp;your WordPress site and&nbsp;continue on&nbsp; Instagram, Facebook, eBay, Amazon, Google Shopping and&nbsp;more
                         </div>
                         <div>
-                     <span class="icon">
+                            <span class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
                            <g fill="none" fill-rule="evenodd">
                               <path d="M0 0h80v80H0z"></path>
@@ -96,7 +97,8 @@
                            </g>
                         </svg>
                      </span>
-                            <b>Shipping, payment, taxes automated</b><br>
+                            <b>Shipping, payment, taxes automated</b>
+                            <br>
                             <ul>
                                 <li>Automatic tax calculation and&nbsp;filing</li>
                                 <li>All popular shipping carriers integrated</li>
@@ -104,7 +106,7 @@
                             </ul>
                         </div>
                         <div>
-                     <span class="icon">
+                            <span class="icon">
                         <svg height="80" width="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
                            <g fill="none" fill-rule="evenodd">
                               <path d="M16 16h48v48H16z"></path>
@@ -126,7 +128,7 @@
                             </ul>
                         </div>
                         <div>
-                     <span class="icon">
+                            <span class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
                            <g fill="none" fill-rule="evenodd">
                               <path d="M0 0h80v80H0z"></path>
@@ -137,7 +139,8 @@
                            </g>
                         </svg>
                      </span>
-                            <b>Mobile</b><br>
+                            <b>Mobile</b>
+                            <br>
                             <ul>
                                 <li>Best store management mobile app included</li>
                                 <li>Mobile storefront app on&nbsp;request</li>
@@ -169,7 +172,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="vertical-tile__image vertical-tile__child">      <img src="https://don16obqbay2c.cloudfront.net/wp-content/themes/ecwid/images/wordpress-zero-2x.png"></div>
+                <div class="vertical-tile__image vertical-tile__child"> <img src="https://don16obqbay2c.cloudfront.net/wp-content/themes/ecwid/images/wordpress-zero-2x.png"></div>
             </div>
         </div>
     </div>
@@ -190,7 +193,7 @@
                         <a href="javascript: openPresalesChat(this);" class="btn btn-light">Try Customer Support Chat</a>
                     </div>
                 </div>
-                <div class="vertical-tile__image vertical-tile__child">      <img src="https://don16obqbay2c.cloudfront.net/wp-content/themes/ecwid/images/wordpress-star-2x.png"></div>
+                <div class="vertical-tile__image vertical-tile__child"> <img src="https://don16obqbay2c.cloudfront.net/wp-content/themes/ecwid/images/wordpress-star-2x.png"></div>
             </div>
         </div>
     </div>
@@ -266,7 +269,69 @@
             </div>
         </div>
         <script src="https://don16obqbay2c.cloudfront.net/wp-content/themes/ecwid/js/slider.min.c29e3998.js"></script>
-        <script>jQuery(document).on('ready', function() {  jQuery('.vertical-showcase__images').slick({   slidesToShow: 5,   slidesToScroll: 1,   initialSlide: 0,   focusOnSelect : true,   infinite: true,   dots: true,   arrows: true,     nextArrow: '<div class="slick-next"><span class="icon-right"></span></div>',       prevArrow: '<div class="slick-prev"><span class="icon-left"></span></div>',     centerPadding: '8px',   responsive: [{    breakpoint: 1199,    settings: {     arrows: false,     slidesToShow: 4,    }   },{    breakpoint: 769,    settings: {     arrows: false,     centerMode: true,     centerPadding: '60px',     slidesToShow: 3,     slidesToScroll: 1,     dots: true,    }   }, {    breakpoint: 600,    settings: {     arrows: false,     centerMode: true,     centerPadding: '40px',     slidesToShow: 2,     initialSlide: 1,     dots: true,    }   }, {    breakpoint: 530,    settings: {     arrows: false,     centerMode: true,     centerPadding: '80px',     slidesToShow: 1,     initialSlide: 0,     dots: true,    }   }, {    breakpoint: 480,    settings: {     arrows: false,     centerMode: true,     centerPadding: '40px',     slidesToShow: 1,     initialSlide: 0,     dots: true,    }   }    ]  }); });</script>
+        <script>
+            jQuery(document).on('ready', function() {
+                jQuery('.vertical-showcase__images').slick({
+                    slidesToShow: 5,
+                    slidesToScroll: 1,
+                    initialSlide: 0,
+                    focusOnSelect: true,
+                    infinite: true,
+                    dots: true,
+                    arrows: true,
+                    nextArrow: '<div class="slick-next"><span class="icon-right"></span></div>',
+                    prevArrow: '<div class="slick-prev"><span class="icon-left"></span></div>',
+                    centerPadding: '8px',
+                    responsive: [{
+                        breakpoint: 1199,
+                        settings: {
+                            arrows: false,
+                            slidesToShow: 4,
+                        }
+                    }, {
+                        breakpoint: 769,
+                        settings: {
+                            arrows: false,
+                            centerMode: true,
+                            centerPadding: '60px',
+                            slidesToShow: 3,
+                            slidesToScroll: 1,
+                            dots: true,
+                        }
+                    }, {
+                        breakpoint: 600,
+                        settings: {
+                            arrows: false,
+                            centerMode: true,
+                            centerPadding: '40px',
+                            slidesToShow: 2,
+                            initialSlide: 1,
+                            dots: true,
+                        }
+                    }, {
+                        breakpoint: 530,
+                        settings: {
+                            arrows: false,
+                            centerMode: true,
+                            centerPadding: '80px',
+                            slidesToShow: 1,
+                            initialSlide: 0,
+                            dots: true,
+                        }
+                    }, {
+                        breakpoint: 480,
+                        settings: {
+                            arrows: false,
+                            centerMode: true,
+                            centerPadding: '40px',
+                            slidesToShow: 1,
+                            initialSlide: 0,
+                            dots: true,
+                        }
+                    }]
+                });
+            });
+        </script>
     </div>
     <div class="vertical-block vertical-text wordpress-page-features2">
         <div class="vertical-block__container vertical-text__container">
@@ -278,7 +343,7 @@
                     </div>
                     <div class="fb-integration__text">
                         <p>
-                     <span class="icon">
+                            <span class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
                            <path fill="none" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M54.998 37.08l.002-.052C55 28.728 48.285 22 40 22c-8.284 0-15 6.728-15 15.028 0 .018.003.035.003.053-5.087.73-9.003 5.101-9.003 10.4C16 53.29 20.701 58 26.5 58h27C59.299 58 64 53.29 64 47.48c0-5.298-3.915-9.67-9.002-10.4z"></path>
                         </svg>
@@ -288,31 +353,37 @@
                                 <nobr>maintenance-free</nobr>
                                 solution
                             </b>
-                            <br>  We&nbsp;do&nbsp;updates. We&nbsp;do&nbsp;backups. We&nbsp;do&nbsp;support. We&nbsp;autoscale. You do&nbsp;what you love&nbsp;— create sites.
+                            <br> We&nbsp;do&nbsp;updates. We&nbsp;do&nbsp;backups. We&nbsp;do&nbsp;support. We&nbsp;autoscale. You do&nbsp;what you love&nbsp;— create sites.
                         </p>
                         <p>
-                     <span class="icon">
+                            <span class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
                            <path fill="none" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M21 20l7 7-7 7m39-14H37m23 13H37m7 13H20m40 0h-5M31 59H20m40 0H43"></path>
                         </svg>
                      </span>
-                            <b>Explore the&nbsp;Ecwid API</b><br>  Ecwid is&nbsp;as&nbsp;customizable as&nbsp;WooCommerce.<br>  <a href="https://developers.ecwid.com/api-documentation" target="_blank">See the&nbsp;API docs&nbsp;›</a>
+                            <b>Explore the&nbsp;Ecwid API</b>
+                            <br> Ecwid is&nbsp;as&nbsp;customizable as&nbsp;WooCommerce.
+                            <br> <a href="https://developers.ecwid.com/api-documentation" target="_blank">See the&nbsp;API docs&nbsp;›</a>
                         </p>
                         <p>
-                     <span class="icon">
+                            <span class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
                            <path fill="none" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M64 64H16V16m0 48l14.968-24.051 10.795 6.085 4.5-23.634 9.487 10.904L64 24.833"></path>
                         </svg>
                      </span>
-                            <b>Become a&nbsp;web partner</b><br>  Earn extra money on&nbsp;every customer with our great affiliate program.<br>  <a href="https://www.ecwid.com/webpartners">Web partners program&nbsp;›</a>
+                            <b>Become a&nbsp;web partner</b>
+                            <br> Earn extra money on&nbsp;every customer with our great affiliate program.
+                            <br> <a href="https://www.ecwid.com/webpartners">Web partners program&nbsp;›</a>
                         </p>
                         <p>
-                     <span class="icon">
+                            <span class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
                            <path fill="none" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17.5 31.5H64M40 63l24-31.51L54.832 18H25.167L16 31.49 40 63z"></path>
                         </svg>
                      </span>
-                            <b>Use premium Ecwid subscription for&nbsp;free</b><br>  Need a&nbsp;premium Ecwid account to&nbsp;build and&nbsp;test WordPress sites? It&nbsp;is&nbsp;on&nbsp;us. Drop us&nbsp;a&nbsp;line, we&nbsp;will give it&nbsp;to&nbsp;you.<br>  <a href="https://ecommerce-store.typeform.com/to/Heh5d4" target="_blank" rel="nofollow noopener">Write to&nbsp;us&nbsp;›</a>
+                            <b>Use premium Ecwid subscription for&nbsp;free</b>
+                            <br> Need a&nbsp;premium Ecwid account to&nbsp;build and&nbsp;test WordPress sites? It&nbsp;is&nbsp;on&nbsp;us. Drop us&nbsp;a&nbsp;line, we&nbsp;will give it&nbsp;to&nbsp;you.
+                            <br> <a href="https://ecommerce-store.typeform.com/to/Heh5d4" target="_blank" rel="nofollow noopener">Write to&nbsp;us&nbsp;›</a>
                         </p>
                     </div>
                 </div>
@@ -388,5 +459,13 @@
             </div>
         </div>
     </div>
-    <script>jQuery(document).ready(function() {  jQuery(".wordpress-page-main .vertical-header__text").addClass("in-view");  jQuery(".wordpress-page-main img").addClass("in-view");  jQuery(".wordpress-page-main .btn-block").addClass("in-view");  var jQueryanimationElements = ['.wordpress-page-features', '.wordpress-page-features2', '.wordpress-page-last', '.block-banner-gallery-inner', '.wordpress-page-star', '.wordpress-page-zero','.wordpress-page-tablet', '.wordpress-page-tablet img', '.wordpress-page-tablet .vertical-tile__text','.wordpress-page-desktop img', '.wordpress-page-desktop .btn-block', '.wordpress-page-desktop .vertical-header__text'];  initScrollAnimation(jQueryanimationElements);      });</script>
+    <script>
+        jQuery(document).ready(function() {
+            jQuery(".wordpress-page-main .vertical-header__text").addClass("in-view");
+            jQuery(".wordpress-page-main img").addClass("in-view");
+            jQuery(".wordpress-page-main .btn-block").addClass("in-view");
+            var jQueryanimationElements = ['.wordpress-page-features', '.wordpress-page-features2', '.wordpress-page-last', '.block-banner-gallery-inner', '.wordpress-page-star', '.wordpress-page-zero', '.wordpress-page-tablet', '.wordpress-page-tablet img', '.wordpress-page-tablet .vertical-tile__text', '.wordpress-page-desktop img', '.wordpress-page-desktop .btn-block', '.wordpress-page-desktop .vertical-header__text'];
+            initScrollAnimation(jQueryanimationElements);
+        });
+    </script>
 </div>
