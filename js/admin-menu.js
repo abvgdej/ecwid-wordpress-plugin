@@ -53,6 +53,7 @@ function ecwidApplyIframeAdminMenu($link, menu) {
         .data('ecwid-menu', menu)
         .attr('data-ecwid-menu-slug', menu.slug)
         .click(function () {
+            
             var ecwidMenu = jQuery(this).data('ecwid-menu');
 
             var link = jQuery(this).closest('li');
@@ -60,7 +61,7 @@ function ecwidApplyIframeAdminMenu($link, menu) {
             var isOpen = link.hasClass('wp-has-current-submenu3');
 
 
-            ecwidOpenAdminPage(ecwidMenu.hash);
+            var inFrameOpen = ecwidOpenAdminPage(ecwidMenu.hash);
             history.pushState({}, null, ecwidMenu.url);
 
             ecwidRefreshEcwidMenuItemSelection();
@@ -68,6 +69,10 @@ function ecwidApplyIframeAdminMenu($link, menu) {
             jQuery('#wpwrap.wp-responsive-open').removeClass('wp-responsive-open');
             jQuery(this).parents('.opensub').removeClass('opensub');
 
+            if ( !inFrameOpen ) {
+                return true;
+            }
+            
             return false;
         });
 }
@@ -142,14 +147,16 @@ jQuery(document).ready(function() {
 
     window.ecwidOpenAdminPage = function (place) {
         if (jQuery('#ecwid-frame').length < 1) {
-            return;
+            return false;
         }
         
         jQuery('#ecwid-frame')[0].contentWindow.postMessage(JSON.stringify({
             ecwidAppNs: "ecwid-wp-plugin",
             method: "openPage",
             data: place
-        }), "*")
+        }), "*");
+        
+        return true;
     }
 
 
