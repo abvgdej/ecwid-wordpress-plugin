@@ -704,6 +704,429 @@ img{height:auto;width:auto;}
 @media (min-width:600px){
     .slick-dots li.slick-active button::before{background-color:#009bf1;transform:scale(1.7);}
 }
+
+@media all {
+    a {
+        color: #0073aa;
+        transition-property: border, background, color;
+        transition-duration: .05s;
+        transition-timing-function: ease-in-out;
+    }
+    a,
+    div {
+        outline: 0;
+    }
+    a:active,
+    a:hover {
+        color: #00a0d2;
+    }
+    a:focus {
+        color: #124964;
+        box-shadow: 0 0 0 1px #5b9dd9, 0 0 2px 1px rgba(30, 140, 190, .8);
+    }
+    h3 {
+        display: block;
+        font-weight: 600;
+    }
+    h3 {
+        color: #23282d;
+        font-size: 1.3em;
+        margin: 1em 0;
+    }
+    @media screen and (max-width:782px) {
+        body * {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0)!important;
+        }
+    }
+    button {
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+    }
+    ::-webkit-input-placeholder {
+        color: #72777c;
+    }
+    ::-moz-placeholder {
+        color: #72777c;
+        opacity: 1;
+    }
+    :-ms-input-placeholder {
+        color: #72777c;
+    }
+    .wp-core-ui button::-moz-focus-inner {
+        border-width: 0;
+        border-style: none;
+        padding: 0;
+    }
+}
+
+
+/*! CSS Used from: http://localhost/wordpress/PLUGINS-2496/wp-content/plugins/ecwid-shopping-cart/css/landing.css?ver=6.4.6 ; media=all */
+
+.ecwid-button {
+    text-align: center;
+}
+
+@media screen and (min-width: 1024px) {
+    .ecwid-button {
+        text-align: left;
+    }
+}
+
+.ecwid-button button {
+    width: 300px;
+}
+
+.ecwid-button a,
+.ecwid-button button {
+    background-image: none;
+}
+.ecwid-button .button-description-mobile {
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 38px;
+    color: #999;
+}
+.ecwid-button .button-description-mobile h3 {
+    font-size: 18px;
+    color: #363636;
+    font-weight: 600;
+    margin-bottom: -70px;
+}
+@media (min-width: 1024px) {
+    .ecwid-button .button-description-mobile {
+        display: none;
+    }
+}
+.ecwid-button .ecwid-button-description {
+    font-size: 14px;
+}
+.ecwid-button .ecwid-button-description a {
+    display: block;
+    font-size: 20px;
+    color: #288FB5;
+    margin-top: 12px;
+    text-decoration: none;
+}
+.ecwid-button .ecwid-button-description a:hover {
+    opacity: 0.8;
+}
+
+.ecwid-button .ecwid-button-description {
+    margin-top: 15px;
+}
+
+@media (max-width: 767px) {
+    .ecwid-button .ecwid-button-description a {
+        margin-bottom: 10px;
+        font-size: 18px;
+    }
+}
+.ecwid-landing .on-error {
+    display: none;
+}
+.ecwid-button .ecwid-connection-error {
+    color: red;
+}
+@media (min-width: 768px) {
+    .ecwid-button .ecwid-connection-error {
+        position: relative;
+        margin-bottom: 8px;
+    }
+}
+.ecwid-landing a:focus {
+    outline: 0px none;
+    box-shadow: none;
+}
+.ecwid-landing .ecwid-button .btn {
+    width: 300px;
+    margin-bottom: 40px;
+    height: 59px;
+    font-size: 20px;
+}
+.ecwid-button .create-store-loading,
+.ecwid-button .create-store-loading-note,
+.ecwid-button .create-store-success-note,
+.ecwid-button .create-store-success {
+    display: none;
+}
+.ecwid-button .create-store-loading-note,
+.ecwid-button .create-store-success-note {
+    margin-bottom: 32px;
+}
+
+.ecwid-button [class*="icon-"] {
+    display: inline-block;
+    text-transform: none;
+    font-weight: normal;
+    font-style: normal;
+    font-variant: normal;
+    font-family: 'font_icons';
+    line-height: 1;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-transition: color .1s linear;
+    transition: color .1s linear;
+}
+.icon-check:before {
+    content: "\e01a";
+}
+
+.btn:focus,
+.btn.btn-loading,
+.btn.btn-loading:hover,
+.btn.btn-loading:focus,
+.btn.btn-loading:focus:hover,
+.btn.btn-loading:active,
+.btn.btn-loading:focus:active {
+    border-width: 2px;
+    padding: 3px 9px;
+}
+.btn:hover {
+    background-color: #c4c4c4;
+}
+.btn:focus {
+    border-color: #acacac;
+}
+.btn:focus:hover {
+    background-color: #c4c4c4;
+}
+.btn:active {
+    background-color: #f7f7f7;
+}
+.btn:focus:active {
+    background-color: #f7f7f7;
+}
+.btn.btn-loading,
+.btn.btn-loading:hover,
+.btn.btn-loading:focus,
+.btn.btn-loading:focus:hover,
+.btn.btn-loading:active,
+.btn.btn-loading:focus:active {
+    position: relative;
+    background-color: #f7f7f7;
+    border-color: transparent;
+    overflow: visible;
+}
+.btn.btn-loading .loader-inner,
+.btn.btn-loading .loader-outer,
+.btn.btn-loading:hover .loader-inner,
+.btn.btn-loading:hover .loader-outer,
+.btn.btn-loading:focus .loader-inner,
+.btn.btn-loading:focus .loader-outer,
+.btn.btn-loading:focus:hover .loader-inner,
+.btn.btn-loading:focus:hover .loader-outer,
+.btn.btn-loading:active .loader-inner,
+.btn.btn-loading:active .loader-outer,
+.btn.btn-loading:focus:active .loader-inner,
+.btn.btn-loading:focus:active .loader-outer {
+    fill: #f7f7f7;
+}
+.btn:first-child {
+    *margin-left: 0;
+}
+.btn.btn-loading:before,
+.btn.btn-loading:hover:before,
+.btn.btn-loading:focus:before,
+.btn.btn-loading:focus:hover:before,
+.btn.btn-loading:active:before,
+.btn.btn-loading:focus:active:before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background-color: inherit;
+    opacity: 1;
+    -webkit-transition: opacity .3s ease-out;
+    transition: opacity .3s ease-out;
+}
+.btn-large {
+    font-size: 1.063em;
+    padding: 4px 16px;
+    border-radius: 5px;
+    line-height: 2.118em;
+    height: 2.824em;
+    min-width: 8.471em;
+}
+.btn-large:focus,
+.btn-large.btn.btn-loading,
+.btn-large.btn.btn-loading:focus:hover,
+.btn-large.btn.btn-loading:focus:active {
+    border-width: 2px;
+    padding: 3px 15px;
+}
+.btn-icon {
+    background-color: #f6f6f6;
+    color: #333;
+    border-color: #cccccc;
+}
+.btn-icon:hover {
+    background-color: #fff;
+    color: #137ebe;
+    border-color: #89bede;
+}
+.btn-icon:focus {
+    background-color: #eaf2f7;
+    border-color: #b3cad5;
+}
+.btn-icon:focus:hover {
+    background-color: #fff;
+    border-color: #137ebe;
+}
+.btn-icon:active {
+    background-color: #fff;
+    color: #5ebbf3;
+    border-color: #aeddf9;
+}
+.btn-icon:focus:active {
+    background-color: #fff;
+    border-color: #5ebbf3;
+}
+.btn-primary,
+.ecwid-button .btn-primary {
+    color: #fff;
+    background-color: #189dee;
+    border-color: transparent;
+}
+.btn-primary:hover {
+    background-color: #137dbe;
+}
+.btn-primary:focus {
+    border-color: #106da6;
+}
+.btn-primary:focus:hover {
+    background-color: #137dbe;
+}
+.btn-primary:active {
+    background-color: #46b0f1;
+}
+.btn-primary:focus:active {
+    background-color: #46b0f1;
+}
+.btn-primary.btn.btn-loading,
+.btn-primary.btn.btn-loading:focus:hover,
+.btn-primary.btn.btn-loading:focus:active {
+    position: relative;
+    background-color: #46b0f1;
+    border-color: transparent;
+    overflow: visible;
+}
+.btn-primary.btn-loading .loader-inner,
+.btn-primary.btn-loading .loader-outer,
+.btn-primary.btn-loading:hover .loader-inner,
+.btn-primary.btn-loading:hover .loader-outer,
+.btn-primary.btn-loading:focus .loader-inner,
+.btn-primary.btn-loading:focus .loader-outer,
+.btn-primary.btn-loading:focus:hover .loader-inner,
+.btn-primary.btn-loading:focus:hover .loader-outer,
+.btn-primary.btn-loading:active .loader-inner,
+.btn-primary.btn-loading:active .loader-outer,
+.btn-primary.btn-loading:focus:active .loader-inner,
+.btn-primary.btn-loading:focus:active .loader-outer {
+    fill: #46b0f1;
+}
+.btn-success,
+.ecwid-button .btn-success {
+    color: #fff;
+    background-color: #64a52f;
+    border-color: transparent;
+}
+.btn-success:hover {
+    background-color: #508425;
+}
+.btn-success:focus {
+    border-color: #467320;
+}
+.btn-success:focus:hover {
+    background-color: #508425;
+}
+.btn-success:active {
+    background-color: #83b758;
+}
+.btn-success:focus:active {
+    background-color: #83b758;
+}
+.btn [class*="icon-"] {
+    color: inherit;
+    padding-right: 0.688em;
+    vertical-align: text-top;
+    font-size: 1.143em;
+    margin-top: 1px;
+    opacity: .8;
+}
+.btn-icon {
+    min-width: 40px;
+}
+.btn-icon.btn-large {
+    min-width: 60px;
+}
+.btn-icon [class*='icon-'] {
+    padding: 0;
+}
+.loader svg {
+    height: 100%;
+    width: 100%;
+}
+[class*="loading"] .loader .spin-right {
+    -webkit-animation: spinright 0.5s infinite linear;
+    animation: spinright 0.5s infinite linear;
+}
+.btn .loader {
+    position: absolute;
+    width: 100%;
+    height: 160%;
+    top: -30%;
+    left: 0;
+    display: none;
+    z-index: 1;
+    overflow: hidden;
+    -webkit-animation: fadein .1s 1 linear;
+    animation: fadein .1s 1 linear;
+}
+.btn .loader .ecwid-spinner {
+    margin: 0 auto;
+    height: 100%;
+    height: -webkit-calc(100% + 0px);
+    width: -webkit-calc(100% + 0px);
+}
+.btn-loading .loader {
+    display: block;
+}
+
+
+/*! CSS Used keyframes */
+
+@keyframes spinright {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spinright {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@font-face {
+    font-family: 'font_icons';
+    src: url('//s3.amazonaws.com/myecwidcom-static/static/fonts/icons/v13/fontIcons.eot');
+    src: url('//s3.amazonaws.com/myecwidcom-static/static/fonts/icons/v13/fontIcons.eot?#iefix') format('embedded-opentype'), url('//s3.amazonaws.com/myecwidcom-static/static/fonts/icons/v13/fontIcons.ttf') format('truetype'), url('//s3.amazonaws.com/myecwidcom-static/static/fonts/icons/v13/fontIcons.woff') format('woff'), url('//s3.amazonaws.com/myecwidcom-static/static/fonts/icons/v13/fontIcons.svg#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 /*! CSS Used fontfaces */
 @font-face{font-family:font_icons;src:url(https://don16obqbay2c.cloudfront.net/wp-content/themes/common/fonts/fontIcons.eot?-u05njb);src:url(https://don16obqbay2c.cloudfront.net/wp-content/themes/common/fonts/fontIcons.eot?#iefix-u05njb) format("embedded-opentype"),url(https://don16obqbay2c.cloudfront.net/wp-content/themes/common/fonts/fontIcons.woff?-u05njb) format("woff"),url(https://don16obqbay2c.cloudfront.net/wp-content/themes/common/fonts/fontIcons.ttf?-u05njb) format("truetype"),url(https://don16obqbay2c.cloudfront.net/wp-content/themes/common/fonts/fontIcons.svg?-u05njb#fontIcons) format("svg");font-weight:400;font-style:normal;}
 @font-face{font-family:'Open Sans';font-style:italic;font-weight:300;src:local('Open Sans Light Italic'), local('OpenSans-LightItalic'), url(https://fonts.gstatic.com/s/opensans/v15/memnYaGs126MiZpBA-UFUKWyV9hmIqOxjaPXZSk.woff2) format('woff2');unicode-range:U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;}
@@ -896,4 +1319,8 @@ img{height:auto;width:auto;}
 @media screen and (min-width:1130px){
     .wordpress-page-testimonials .block-banner-gallery .arrow.left{left:0;}
     .wordpress-page-testimonials .block-banner-gallery .arrow.right{left:auto;right:0;}
+}
+
+@media screen and (max-width:1023px){
+    .vertical-header__small-text{display: none; }
 }
