@@ -1,4 +1,7 @@
 /*! CSS Used from: https://don16obqbay2c.cloudfront.net/wp-content/themes/ecwid/style.a7199135.css */
+body {
+    font-family:"Open Sans";
+}
 h1,h2{line-height:1.333em;font-weight:600;margin:1.1em 0 .7em;color:#333;}
 h1{font-size:24px;}
 h2{font-size:22px;}
@@ -768,7 +771,7 @@ img{height:auto;width:auto;}
 }
 
 @media screen and (min-width: 1024px) {
-    .ecwid-button {
+    .wordpress-page-desktop .ecwid-button {
         text-align: left;
     }
 }
@@ -834,16 +837,21 @@ img{height:auto;width:auto;}
         margin-bottom: 8px;
     }
 }
-.ecwid-landing a:focus {
+.ecwid-landing-page a:focus {
     outline: 0px none;
     box-shadow: none;
 }
-.ecwid-landing .ecwid-button .btn {
+.ecwid-landing-page .ecwid-button .btn {
     width: 300px;
     margin-bottom: 40px;
     height: 59px;
     font-size: 20px;
 }
+
+ecwid-landing-page ul {
+    list-style-type: disc;
+}
+
 .ecwid-button .create-store-loading,
 .ecwid-button .create-store-loading-note,
 .ecwid-button .create-store-success-note,
@@ -855,6 +863,12 @@ img{height:auto;width:auto;}
     margin-bottom: 32px;
 }
 
+.btn.create-store-button {    
+    font-size: 24px;
+    line-height: 24px;
+    height: auto;
+    padding: 14px 62px;
+}
 .ecwid-button [class*="icon-"] {
     display: inline-block;
     text-transform: none;

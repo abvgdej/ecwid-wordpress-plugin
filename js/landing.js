@@ -61,24 +61,27 @@ var initScrollAnimation = function(selectors){
     function onScroll() {
 
         var windowScrollTop = jQuery(window).scrollTop();
-        var windowBottom = (windowScrollTop + windowHeight);
+        var windowBottom = (windowScrollTop + windowHeight) + 50;
 
         jQuery.each(elements, function () {
             var element = jQuery(this);
             var elementTop = element.offset().top;
             var elementBottom = (elementTop + element.outerHeight());
             var elementMiddle = elementTop + element.outerHeight()/2;
-
+            
             if ( (elementBottom >= windowScrollTop) && (elementTop <= windowBottom) ) {
                 element.addClass('in-view');
             }
         });
     }
+    
+    onScroll();
 }
 //to start: initScrollAnimation(['.selector1', '#selector2']);
 
 jQuery(document).ready(function() {
-var userAction = "click";
+
+    var userAction = "click";
 !function() {
     function t() {
         !function() {

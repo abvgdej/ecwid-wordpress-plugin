@@ -1,4 +1,4 @@
-<div class="vertical-page fb-page wordpress-page">
+<div class="vertical-page fb-page wordpress-page ecwid-landing-page">
     <div class="vertical-block vertical-header wordpress-page-desktop">
         <div class="vertical-block__container vertical-header__container" style="">
             <div class="vertical-block__content vertical-header__content">
@@ -108,7 +108,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="vertical-header__small-text">No&nbsp;credit card required</div>
                 </div>
                 <div class="vertical-header__img">
                     <div class="vertical-header__img-wrap"> <img class="animation-element slide-left in-view" src="https://don16obqbay2c.cloudfront.net/wp-content/themes/ecwid/images/wordpress-main-2x.png" alt="E-commerce for WordPress" srcset=""></div>
@@ -266,7 +265,8 @@
             </div>
         </div>
     </div>
-    <div class="vertical-block vertical-tile wordpress-page-star wordpress-page-star">
+    
+    <!--div class="vertical-block vertical-tile wordpress-page-star wordpress-page-star">
         <div class="vertical-block__container vertical-tile__container clearfix">
             <div class="vertical-block__content vertical-tile__content clearfix">
                 <h2 class="vertical-tile__header vertical-tile__header--mobile">
@@ -286,7 +286,7 @@
                 <div class="vertical-tile__image vertical-tile__child"> <img src="https://don16obqbay2c.cloudfront.net/wp-content/themes/ecwid/images/wordpress-star-2x.png"></div>
             </div>
         </div>
-    </div>
+    </div-->
     <div class="vertical-block vertical-showcase ">
         <div class="vertical-block__container vertical-showcase__container">
             <div class="vertical-block__content vertical-showcase__content">
@@ -596,7 +596,7 @@
             jQuery(".wordpress-page-main .vertical-header__text").addClass("in-view");
             jQuery(".wordpress-page-main img").addClass("in-view");
             jQuery(".wordpress-page-main .btn-block").addClass("in-view");
-            var jQueryanimationElements = ['.wordpress-page-features', '.wordpress-page-features2', '.wordpress-page-last', '.block-banner-gallery-inner', '.wordpress-page-star', '.wordpress-page-zero', '.wordpress-page-tablet', '.wordpress-page-tablet img', '.wordpress-page-tablet .vertical-tile__text', '.wordpress-page-desktop img', '.wordpress-page-desktop .btn-block', '.wordpress-page-desktop .vertical-header__text'];
+            var jQueryanimationElements = ['.wordpress-page-features', '.wordpress-page-features2', '.wordpress-page-last', '.block-banner-gallery-inner', /*'.wordpress-page-star',*/ '.wordpress-page-zero', '.wordpress-page-tablet', '.wordpress-page-tablet img', '.wordpress-page-tablet .vertical-tile__text', '.wordpress-page-desktop img', '.wordpress-page-desktop .btn-block', '.wordpress-page-desktop .vertical-header__text'];
             initScrollAnimation(jQueryanimationElements);
         });
     </script>
