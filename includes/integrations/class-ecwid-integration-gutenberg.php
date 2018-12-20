@@ -6,7 +6,8 @@ class Ecwid_Integration_Gutenberg {
 	
 	const STORE_BLOCK = 'ecwid/store-block';
 	const PRODUCT_BLOCK = 'ecwid/product-block';
-	
+	const BUYNOW_BLOCK = 'ecwid/buynow';
+
 	public function __construct() {
 
 		if ( isset( $_GET['classic-editor'] ) ) return;
@@ -30,6 +31,11 @@ class Ecwid_Integration_Gutenberg {
 		register_block_type(self::PRODUCT_BLOCK, array(
 			'editor_script' => 'ecwid-gutenberg-store',
 			'render_callback' => array( $this, 'product_render_callback' ),
+		));
+
+		register_block_type(self::BUYNOW_BLOCK, array(
+			'editor_script' => 'ecwid-gutenberg-store',
+			'render_callback' => array( $this, 'buynow_render_callback' ),
 		));
 		
 		add_action( 'in_admin_header', array( $this, 'add_popup' ) );
@@ -128,11 +134,15 @@ class Ecwid_Integration_Gutenberg {
 	
 	protected function _get_products_data() {
 
-		$blocks = gutenberg_parse_blocks( get_post()->post_content );
+		if ( function_exists( 'gutenberg_parse_blocks' ) ) {
+			$blocks = gutenberg_parse_blocks( get_post()->post_content );
+		} else {
+			$blocks = parse_blocks( get_post()->post_content );
+		}
 
 		$productIds = array();
 		foreach ( $blocks as $block ) {
-			if ( $block['blockName'] == self::PRODUCT_BLOCK ) {
+			if ( $block['blockName'] == self::PRODUCT_BLOCK || $blocks['blockName'] == self::BUYNOW_BLOCK ) {
 				$productIds[] = $block['attrs']['id'];
 			}
 		}
@@ -166,6 +176,22 @@ class Ecwid_Integration_Gutenberg {
 		return ecwid_is_demo_store() || !Ecwid_Api_V3::is_available() || $api->is_store_feature_enabled( Ecwid_Api_V3::FEATURE_NEW_DETAILS_PAGE );
 	}
 	
+	public function buynow_render_callback( $params ) {
+		if ( !@$params['id'] ) return '';
+		
+		$params = wp_parse_args(
+			$params, 
+			array(
+				'show_price_on_button' => true,
+				'center_align' => true,
+				'show_border' => false, 
+				'display' => 'addtobag'
+			)
+		);
+		
+		return $this->product_render_callback( $params );
+	}
+	
 	public function product_render_callback( $params ) {
 		
 		if ( !@$params['id'] ) return '';
@@ -174,16 +200,17 @@ class Ecwid_Integration_Gutenberg {
 			'picture', 'title', 'price', 'options', 'qty', 'addtobag' 
 		);
 		
-		$params['display'] = '';
-		$display_string = '';
-		foreach ( $display as $name ) {
-			if ($params['show_' . $name]) {
-				$params['display'] .= ' ' . $name;
+		if ( !$params['display'] ) {
+			$params['display'] = '';
+			foreach ( $display as $name ) {
+				if ($params['show_' . $name]) {
+					$params['display'] .= ' ' . $name;
+				}
 			}
 		}
 		
 		$params['version'] = 2;
-
+		
 		$shortcode = new Ecwid_Shortcode_Product( $params );
 
 		return $shortcode->render();
