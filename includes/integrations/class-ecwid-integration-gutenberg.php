@@ -187,7 +187,14 @@ class Ecwid_Integration_Gutenberg {
 				'show_price_on_button' => true,
 				'center_align' => true,
 				'show_border' => false, 
-				'display' => 'addtobag'
+				'display' => 'addtobag',
+				'id' => 0,
+				'show_picture' => false,
+				'show_title' => false,
+				'show_price' => false,
+				'show_options' => false,
+				'show_qty' => false, 
+				'show_addtobag' => false,
 			)
 		);
 		
@@ -197,6 +204,21 @@ class Ecwid_Integration_Gutenberg {
 	public function product_render_callback( $params ) {
 		
 		if ( !@$params['id'] ) return '';
+		
+		$params = wp_parse_args(
+			$params,
+			array(
+				'id' => 0,
+				'show_picture' => true,
+				'show_title' => true,
+				'show_price' => true,
+				'show_options' => true,
+				'show_addtobag' => true,
+				'show_border' => true,
+				'center_align' => true,
+				'show_price_on_button' => true
+			)
+		);
 		
 		$display = array(
 			'picture', 'title', 'price', 'options', 'qty', 'addtobag' 
