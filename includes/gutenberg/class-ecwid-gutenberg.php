@@ -45,7 +45,16 @@ class Ecwid_Gutenberg {
 
 	public function admin_enqueue_scripts()
 	{
-		wp_enqueue_script( 'gutenberg-store' );
+		EcwidPlatform::enqueue_script( 'gutenberg' );
+		wp_localize_script( 'ecwid-gutenberg', 'EcwidGutenberg', array(
+			'productBrowserBlocks' => array(
+				'ecwid/store-block',
+				'ec-store/category-page',
+				'ec-store/product-page',
+				'ec-store/filters-page',
+				'ec-store/cart-page'
+			)
+		));
 		EcwidPlatform::enqueue_style( 'store-popup' );
 	}
 	

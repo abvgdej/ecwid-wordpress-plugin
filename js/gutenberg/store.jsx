@@ -219,7 +219,7 @@ registerBlockType( blockName, {
         }
         const shortcodeAttributes = {
             'widgets': widgets.join(' '),
-            'default_category_id': typeof props.attributes.default_category_id !== 'undefined' ? props.attributes.default_category_id  : 0
+            'default_category_id': typeof props.attributes.default_category_id !== 'undefined' && props.attributes.default_category_id !== null ? props.attributes.default_category_id : 0
 	    };
 
         const shortcode = new wp.shortcode({
