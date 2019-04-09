@@ -181,6 +181,10 @@ function ecwid_init_integrations()
 			require_once ECWID_PLUGIN_DIR . 'includes/integrations/class-ecwid-integration-' . $class . '.php';
 		}
 	}
+
+	if( !is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
+		require_once ECWID_PLUGIN_DIR . 'includes/integrations/class-ecwid-integration-woocommerce.php';
+	}
 }
 
 add_action('admin_post_ecwid_estimate_sync', 'ecwid_estimate_sync');
