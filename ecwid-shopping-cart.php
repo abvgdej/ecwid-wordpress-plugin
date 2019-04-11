@@ -182,7 +182,7 @@ function ecwid_init_integrations()
 		}
 	}
 
-	if( !is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
+	if( !is_plugin_active( 'woocommerce/woocommerce.php' ) && !in_array('woocommerce/woocommerce.php', $_REQUEST) ) {
 		require_once ECWID_PLUGIN_DIR . 'includes/integrations/class-ecwid-integration-woocommerce.php';
 	}
 }
