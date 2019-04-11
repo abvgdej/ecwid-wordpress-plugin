@@ -100,6 +100,7 @@ $GLOBALS['product'] = wc_get_product();
 */
 class WC_Widget_Cart extends Ecwid_Widget_NSF_Minicart
 {
+	protected $_hide_title = true;
 	public function __construct() {
 		parent::__construct();
 	}
@@ -129,6 +130,7 @@ class WC_Widget_Product_Categories extends Ecwid_Widget_Vertical_Categories_List
 
 class WC_Widget_Recently_Viewed extends Ecwid_Widget_Recently_Viewed
 {
+	protected $_hide_title = true;
 	public function __construct() {
 		parent::__construct();
 	}
@@ -151,7 +153,7 @@ add_filter( 'pre_post_link', function( $permalink, $post, $leavename ){
 
 add_action( 'wp_footer', function(){
 	$scriptjs_url = 'https://' . Ecwid_Config::get_scriptjs_domain() . '/script.js?' . get_ecwid_store_id() . ecwid_get_scriptjs_params();
-	
+
 	echo '<script data-cfasync="false" type="text/javascript" src="' . $scriptjs_url . '"></script>';
 	echo <<<HTML
 	<script>
