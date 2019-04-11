@@ -10,7 +10,9 @@ class WC_Integration {}
 class WC_Cart
 {
 	public function get_cart_subtotal() { return '<span title="ec-cart-subtotal">0</span>'; }
-	public function get_cart_contents_count() { return '<span title="ec-cart-count">0</span>'; }
+	public function get_cart_contents_count() {
+		return '<span title="ec-cart-count">' . get_option( 'ec-cart-product-quantity', 0 ) . '</span>'; 
+	}
 	public function get_cart_total() { return 0; }
 	public function get_cart_item_quantities() { return 0; }
 }
@@ -166,7 +168,7 @@ add_action( 'wp_footer', function(){
 			if( jQuery('[title="ec-cart-subtotal"]').length ) {
 				var price = 0;
 				jQuery( cart.items ).each(function(){
-					price += this.product.price;
+					price += this.product.price * this.quantity;
 				})
 				jQuery('[title="ec-cart-subtotal"]').text( Ecwid.formatCurrency( price ) );
 			}
@@ -181,5 +183,6 @@ add_action( 'widgets_init', function() {
 	register_widget( 'WC_Widget_Product_Search' );
 	register_widget( 'WC_Widget_Product_Categories' );
 });
+
 
 
