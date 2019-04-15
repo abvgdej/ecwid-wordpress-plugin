@@ -175,7 +175,7 @@
 }
 
 .ec-store-block {
-  text-align: center;
+  text-align: center;  
   font-size: 13px;
   font-family: 'Open Sans';
   padding: 1em;
@@ -368,3 +368,8 @@
   max-height: 24px;
   margin-right: 1ch;
 }
+
+.ec-store-dynamic-block[data-ec-store-rendered] {
+  pointer-events: none;
+}
+

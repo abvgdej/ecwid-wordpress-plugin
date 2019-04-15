@@ -121,10 +121,10 @@ HTML;
 					catalog.parentElement.removeChild(catalog);
 				});
 			} else {
-			ecwid_onBodyDone();
-		}
+				ecwid_onBodyDone();
+			}
 
-}
+		}
 </script>
 HTML;
 		return $before . $content . $after;

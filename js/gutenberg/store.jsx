@@ -23,17 +23,8 @@ const {
 
 const {
     PanelBody,
-    PanelRow,
-	ToggleControl,
-	ButtonGroup,
-	Button,
-	BaseControl,
-	Toolbar,
-    ColorPalette,
-    ColorIndicator
+	BaseControl
 } = wp.components;
-
-const { withState } = wp.compose;
 
 const blockName = 'ecwid/store-block';
 
@@ -52,7 +43,7 @@ const blockParams = EcwidGutenbergParams.blockParams[blockName];
  *                             registered; otherwise `undefined`.
  */
 registerBlockType( 'ecwid/store-block', {
-	title: _x( 'Store Home Page', 'ecwid-shopping-cart' ), // Block title.
+	title: __( 'Store Home Page', 'ecwid-shopping-cart' ), // Block title.
 	icon: EcwidIcons.store, 
 	category: 'ec-store', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
     attributes: blockParams.attributes,
@@ -80,7 +71,12 @@ registerBlockType( 'ecwid/store-block', {
         props.setAttributes({widgets:''});
         
 		const editor =
-            <EcwidProductBrowserBlock icon={ EcwidIcons.store } title={ __( 'Store Home Page') } showDemoButton={ blockParams.isDemoStore }>
+            <EcwidProductBrowserBlock
+                attributes={ blockParams.attributes }
+                props={ props } 
+                icon={ EcwidIcons.store } 
+                title={ __( 'Store Home Page') } 
+                showDemoButton={ blockParams.isDemoStore }>
                 <div className="ec-store-products">
                     <div className="ec-store-product1"></div>
                     <div className="ec-store-product2"></div>
@@ -91,7 +87,8 @@ registerBlockType( 'ecwid/store-block', {
                     <div className="ec-store-product5"></div>
                     <div className="ec-store-product6"></div>
                 </div>
-            </EcwidProductBrowserBlock>;
+            </EcwidProductBrowserBlock>
+        ;
        
         function buildDangerousHTMLMessageWithTitle( title, message ) {
             return <BaseControl label={ title }><div dangerouslySetInnerHTML={{ __html: message }} /></BaseControl>;
@@ -217,9 +214,12 @@ registerBlockType( 'ecwid/store-block', {
         if ( props.attributes.show_search ) {
             widgets[widgets.length] = 'search';
         }
+        
+        const default_category_id = props.attributes.default_category_id ? props.attributes.default_category_id : 0;
+        
         const shortcodeAttributes = {
             'widgets': widgets.join(' '),
-            'default_category_id': typeof props.attributes.default_category_id !== 'undefined' && props.attributes.default_category_id !== null ? props.attributes.default_category_id : 0
+            'default_category_id': default_category_id//typeof props.attributes.default_category_id !== 'undefined' && props.attributes.default_category_id !== null ? props.attributes.default_category_id : 0
 	    };
 
         const shortcode = new wp.shortcode({

@@ -88,7 +88,13 @@ registerBlockType( 'ec-store/product-page', {
         }
 
         const editor =
-            <EcwidProductBrowserBlock icon={ EcwidIcons.product } title={ __( 'Product Card Large') }>
+            <EcwidProductBrowserBlock
+                attributes={ blockParams.attributes }
+                
+                props={ props } 
+                render={ attributes.default_product_id } 
+                icon={ EcwidIcons.product } 
+                title={ __( 'Product Card Large') }>
                 <EcwidImage src="product-page-preview.png" />
                 { !attributes.default_product_id &&
 

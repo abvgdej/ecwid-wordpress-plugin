@@ -76,7 +76,9 @@ registerBlockType( 'ec-store/category-page', {
         props.setAttributes({widgets:''});
 
         const editor =
-            <EcwidProductBrowserBlock icon={ EcwidIcons.category } title={ __( 'Store Category Page', 'ecwid-shopping-cart' ) } showDemoButton={ blockParams.isDemoStore }>
+            <EcwidProductBrowserBlock
+                attributes={ blockParams.attributes }
+                props={ props } icon={ EcwidIcons.category } title={ __( 'Store Category Page', 'ecwid-shopping-cart' ) } showDemoButton={ blockParams.isDemoStore }>
                 <div className="ec-store-category-products">
                     <div className="ec-store-category-product1"></div>
                     <div className="ec-store-category-product2"></div>

@@ -53,9 +53,16 @@ class Ecwid_Gutenberg {
 				'ec-store/product-page',
 				'ec-store/filters-page',
 				'ec-store/cart-page'
+			),
+			'widgetsMap' => array(
+				'productbrowser' => 'ProductBrowser',
+				'categories' => 'CategoriesV2',
+				'search' => 'SearchWidget'
 			)
 		));
 		EcwidPlatform::enqueue_style( 'store-popup' );
+		
+		wp_enqueue_script( 'ecwid-scriptjs', 'https://' . Ecwid_Config::get_scriptjs_domain() . '/script.js?' . get_ecwid_store_id() . ecwid_get_scriptjs_params(),array(), get_option('ecwid_plugin_version'), true );
 	}
 	
 	public function block_categories( $categories ) {
