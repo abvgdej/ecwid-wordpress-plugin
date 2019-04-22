@@ -204,10 +204,10 @@ TXT
 				'default'  => 'disabled'
 			),
 			'on_woo_detected' => array(
-				'title' => sprintf( __( 'WooCommerce methods detected', 'ecwid-shopping-cart'), Ecwid_Config::get_brand() ),
-				'message' => __('Install our WooCommerce fork-plugin', 'ecwid-shopping-cart'),
+				'title' => sprintf( __( 'WooCommerce methods detected in your theme', 'ecwid-shopping-cart'), Ecwid_Config::get_brand() ),
+				'message' => __('Install our plugin for work  woo-ready themes', 'ecwid-shopping-cart'),
 				'primary_title' => __( 'Install', 'ecwid-shopping-cart'),
-				'primary_url' => 'admin.php?page=' . Ecwid_Admin::ADMIN_SLUG,
+				'primary_url' => 'admin.php?page=ec-woo-fork',
 				'hideable'  => true,
 				'default'  => 'disabled'
 			),

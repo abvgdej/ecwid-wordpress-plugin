@@ -9,7 +9,8 @@ class Ecwid_Products {
 	protected $_status;
 	protected $_sync_progress_callback;
 
-	const POST_TYPE_PRODUCT = 'ec-product';
+	// const POST_TYPE_PRODUCT = 'ec-product';
+	const POST_TYPE_PRODUCT = 'product';
 	const DB_ALIAS_OUT_OF_STOCK = 'ecwid_out_of_stock';
 	const OPTION_ENABLED = 'ecwid_local_base_enabled';
 	const OPTION_NO_SSE = 'ecwid_local_base_no_sse';

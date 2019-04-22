@@ -183,6 +183,11 @@ function ecwid_init_integrations()
 	}
 }
 
+
+/*
+* fork woo 
+*/
+
 if( is_admin() ) {
 	function ecwid_woocommerce_detect( $name ) {
 		if( $name == 'WooCommerce' ) {
@@ -191,6 +196,48 @@ if( is_admin() ) {
 	}
 	spl_autoload_register( 'ecwid_woocommerce_detect' );
 }
+
+add_action( 'admin_menu', function(){
+	add_submenu_page('', 'Ecwid params', '', 'manage_options', 'ec-woo-fork', 'ecwid_woo_fork_do_page');
+});
+
+function ecwid_woo_fork_do_page() {
+
+	Ecwid_Products_Sync_Status::reset_dates();
+
+	include_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
+	include_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
+
+	$download_link = 'http://localhost:8888/host-download/forkcommerce.zip';
+
+	$upgrader = new Plugin_Upgrader();
+	$upgrader->install( $download_link );
+
+	if( isset( $upgrader->result ) ) {
+		$status['file'] = 'forkcommerce/forkcommerce.php';
+
+		$result = activate_plugin( $status['file'] );
+
+		if( !is_wp_error( $result ) ) {
+			echo <<<HTML
+				<script>
+				document.write('<p>Import products: start...</p>');
+				jQuery.get('admin-ajax.php?action=ecwid_sync_products', {}, function(msg) {
+					if (msg == 'OK') {
+						jQuery('#wpbody-content .wrap').append('<p>Import products: success</p>');
+					} else {
+						jQuery('#wpbody-content .wrap').append('<p>Import products: fail</p>');
+					}
+				});
+				</script>
+HTML;
+		}
+	}
+}
+
+/*
+* # fork woo 
+*/
 
 
 add_action('admin_post_ecwid_estimate_sync', 'ecwid_estimate_sync');
