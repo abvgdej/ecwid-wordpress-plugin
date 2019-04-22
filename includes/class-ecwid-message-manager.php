@@ -203,6 +203,14 @@ TXT
 				'hideable'  => true,
 				'default'  => 'disabled'
 			),
+			'on_woo_detected' => array(
+				'title' => sprintf( __( 'WooCommerce methods detected', 'ecwid-shopping-cart'), Ecwid_Config::get_brand() ),
+				'message' => __('Install our WooCommerce fork-plugin', 'ecwid-shopping-cart'),
+				'primary_title' => __( 'Install', 'ecwid-shopping-cart'),
+				'primary_url' => 'admin.php?page=' . Ecwid_Admin::ADMIN_SLUG,
+				'hideable'  => true,
+				'default'  => 'disabled'
+			),
 
 			'on_no_storeid_on_setup_pages' => array(
 				'type' => 'warning',
@@ -320,8 +328,11 @@ HTML
 		if ($is_ecwid_menu && isset($_GET['reconnect'])) {
 			return false;
 		}
-		
+
 		switch ($name) {
+			case 'on_woo_detected':
+				return is_admin() && !is_plugin_active( 'woocommerce/woocommerce.php' ) && apply_filters('ecwid_woocommerce_detect_hook', false);
+
 			case 'on_activate':
 				return !$this->should_display_on_no_storeid_on_setup_pages() && $admin_page != 'toplevel_page_ec-store' && ecwid_is_demo_store();
 

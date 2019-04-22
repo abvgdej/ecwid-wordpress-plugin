@@ -181,11 +181,17 @@ function ecwid_init_integrations()
 			require_once ECWID_PLUGIN_DIR . 'includes/integrations/class-ecwid-integration-' . $class . '.php';
 		}
 	}
-
-	if( !is_plugin_active( 'woocommerce/woocommerce.php' ) && !in_array('woocommerce/woocommerce.php', $_REQUEST) ) {
-		require_once ECWID_PLUGIN_DIR . 'includes/integrations/class-ecwid-integration-woocommerce.php';
-	}
 }
+
+if( is_admin() ) {
+	function ecwid_woocommerce_detect( $name ) {
+		if( $name == 'WooCommerce' ) {
+			add_filter( 'ecwid_woocommerce_detect_hook', '__return_true' );
+		}
+	}
+	spl_autoload_register( 'ecwid_woocommerce_detect' );
+}
+
 
 add_action('admin_post_ecwid_estimate_sync', 'ecwid_estimate_sync');
 
@@ -1981,12 +1987,6 @@ function ecwid_show_admin_messages() {
 
 		Ecwid_Message_Manager::show_messages();
 	}
-}
-
-function ecwid_show_admin_message($message) {
-
-	$class = version_compare(get_bloginfo('version'), '3.0') < 0 ? "updated fade" : "update-nag";
-	echo sprintf('<div class="%s" style="margin-top: 5px">%s</div>', $class, $message);
 }
 
 function ecwid_store_deactivate() {
