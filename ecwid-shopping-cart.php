@@ -235,6 +235,21 @@ HTML;
 	}
 }
 
+
+add_action('wp_ajax_nopriv_ecwid_test', function(){
+	error_log( 'ajax: test' );
+	error_log( json_encode($_REQUEST) );
+});
+
+/*
+# JS for CP
+EcwidControlPanel.onSavePageData(function(){
+
+	$.get('http://localhost:8888/wp-dev/wp-admin/admin-ajax.php?action=ecwid_test&id=' + $('#productId_gwt-uid-1390').val())
+
+});
+*/
+
 /*
 * # fork woo 
 */
