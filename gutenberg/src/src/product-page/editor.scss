@@ -1,0 +1,18 @@
+.ec-store-block-product-page .image {
+  background: url( '../../images/gutenberg/product-page-preview.png') 50% 50% no-repeat;
+  background-size: 216px 140px;
+  position: absolute;
+  left:0;
+  top:0;
+  right:0;
+  bottom: 0;
+}
+
+.ec-store-block-product-page .image.no-product {
+  bottom: 45px;
+}
+
+.ec-store-block-product-page .button-container {
+  position: absolute;
+  bottom: 20px;
+}
