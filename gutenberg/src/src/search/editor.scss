@@ -1,7 +1,5 @@
 .ec-store-block-search {
   min-width: 500px;
-  min-height: 48px;
-  display: inline-block;
   background: none;
   position: relative;
 }
@@ -10,6 +8,7 @@
   background: url( '../../images/gutenberg/search-preview.png') 50% 50% no-repeat;
   background-size: 500px 48px;
   position: absolute;
+  height: 48px;
   left:0;
   top:0;
   right:0;

@@ -55,15 +55,20 @@ registerBlockType( 'ec-store/categories', {
 	edit: function( props ) {
         
         const { attributes } = props;
-		
-        const editor = <div className="ec-store-block ec-store-block-categories">
+
+        const editor = <div
+			className="ec-store-block ec-store-block-categories ec-store-dynamic-block"
+			data-ec-store-widget="categories"
+			data-ec-store-block-id={ props.clientId }
+			id={ EcwidGutenberg.getWrapperId( props.clientId ) }
+		>
 			<div className="ec-store-block-header">
                 { EcwidIcons.categories }
-				{ __( 'Categories', 'ecwid-shopping-cart' ) }
+                { __( 'Categories', 'ecwid-shopping-cart' ) }
 			</div>
 		</div>;
-        
-		const message = __( 'The block is hidden because you don\'t have categories in your store. <a target="_blank" href="admin.php?page=ec-store-admin-category-id-0-mode-edit">Add categories.</a>', 'ecwid-shopping-cart' );	
+
+        const message = __( 'The block is hidden because you don\'t have categories in your store. <a target="_blank" href="admin.php?page=ec-store-admin-category-id-0-mode-edit">Add categories.</a>', 'ecwid-shopping-cart' );	
 			
         return ([
         	editor,

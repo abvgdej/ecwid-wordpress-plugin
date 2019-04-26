@@ -60,9 +60,13 @@ jQuery(document).ready(function() {
     window.ecwid_script_defer = true;
     window.ecwid_dynamic_widgets = true;
     
+    EcwidGutenberg.getWrapperId = function( blockId ) {
+        return 'ec-store-block-' + blockId;
+    };
+    
     EcwidGutenberg.refresh = function() {
         var allBlocks = [];
-        jQuery('.ec-store-dynamic-block:not([data-ec-store-rendered])').each(function() {
+        jQuery('.ec-store-dynamic-block:not([data-ec-store-rendered=true])').each(function() {
             
             var $that = jQuery(this);
             addWidget = function(id, type, arg) {
@@ -78,11 +82,9 @@ jQuery(document).ready(function() {
             };
             var widget = jQuery(this).attr('data-ec-store-widget');
             var args = jQuery(this).attr('data-ec-store-args');
-            var id = jQuery(this).attr('data-ec-store-id');
+            var id = jQuery(this).attr('data-ec-store-block-id');
             
             var widgetId = 'ec-store-block-' + widget + '-' + id;
-                
-            var widgetType = EcwidGutenberg.widgetsMap[widget];
             
             var oldChildren = jQuery( '#ec-store-block-' + id ).children();
 
@@ -95,11 +97,50 @@ jQuery(document).ready(function() {
                     addWidget( 'ec-store-block-categories-' + id, 'categories', [] );
                 }
                 
-                debugger;
                 addWidget( 'ec-store-block-productbrowser-' + id, widget, args.split(',') );
+                oldChildren.remove();
+            } else if ( widget === 'product' ) {
+
+                let atts = JSON.parse(jQuery(this).attr('data-attributes'));
+                
+                let clone = oldChildren.clone();
+                clone.eq(0).attr('id', 'ec-store-block-product-' + id);
+                jQuery(this).append(clone);
+
+                allBlocks[allBlocks.length] = {
+                    widgetType: EcwidGutenberg.widgetsMap[widget],
+                    id: widgetId,
+                    arg: ["id=" + atts.id]
+                };
+                oldChildren.eq(0).removeClass('ecwid ecwid-Product ecwid-SingleProduct-v2').hide();
+
+                /*
+                addWidget( 'ec-store-block-product-' + id, widget, ["id=" + atts.id] );
+                /*
+                jQuery(this).append(
+                    <div id={ "ec-store-block-product-" + blockId } className="ecwid ecwid-SingleProduct-v2 ecwid-Product" data-single-product-id={ atts.id } itemscope itemtype="https://schema.org/Product">
+                        { atts.show_picture && <div itemprop="picture"></div> }
+                        { atts.show_title && <div className="ecwid-title" itemprop="title"></div> }
+                        { atts.show_price &&
+                        <div itemtype="https://schema.org/Offer" itemscope itemprop="offers">
+                            <div className="ecwid-productBrowser-price ecwid-price" itemprop="price"
+                                 data-spw-price-location={ atts.show_price_on_button ? 'button' : '' }></div>
+                            <div itemprop="priceCurrency"></div>
+                        </div>
+                        }
+                        { atts.show_options && <div customprop="options"></div> }
+                        { atts.show_qty && <div customprop="qty"></div> }
+                        { atts.show_addtobag && <div customprop="addtobag"></div> }
+                    </div>
+                );
+                allBlocks[allBlocks.length] = {
+                    widgetType: EcwidGutenberg.widgetsMap[widget],
+                    id: widgetId,
+                    arg: ["id=" + jQuery('#' + id).attr('data-single-product-id')]
+                };*/
+//                addWidget( widgetId, widget, [] );
             }
             
-            oldChildren.remove();
             jQuery(this)
                 .addClass('ec-store-rendered')
                 .attr('data-ec-store-rendered', true)
@@ -107,6 +148,10 @@ jQuery(document).ready(function() {
         });
         
         if (allBlocks.length > 0) {
+            if (Ecwid && Ecwid.destroy) {
+                Ecwid.destroy();
+            }
+            
             window._xnext_initialization_scripts = allBlocks;
             ecwid_onBodyDone();
         }

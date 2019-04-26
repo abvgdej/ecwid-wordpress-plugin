@@ -34,7 +34,6 @@ class Ecwid_Gutenberg_Block_Product extends Ecwid_Gutenberg_Block_Base {
 		);
 
 		$params['display'] = '';
-		$display_string = '';
 		foreach ( $display as $name ) {
 			if ( @$params['show_' . $name] ) {
 				$params['display'] .= ' ' . $name;

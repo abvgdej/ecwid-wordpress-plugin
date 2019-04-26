@@ -48,10 +48,20 @@ registerBlockType( 'ec-store/search', {
         
         const { attributes } = props;
 		
-        const editor = <div className="ec-store-block ec-store-block-search">
+        
+        const editor = <div 
+			className="ec-store-block ec-store-block-search ec-store-dynamic-block" 
+			data-ec-store-widget="search"
+			data-ec-store-block-id={props.clientId}
+			id={ EcwidGutenberg.getWrapperId( props.clientId ) }
+		>
 			<div class="image"></div>
 		</div>;
-        
+
+        setTimeout( function() {
+            EcwidGutenberg.refresh()
+        });
+			
         return ([
         	editor
         ]); 

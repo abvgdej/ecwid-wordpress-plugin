@@ -128,6 +128,7 @@ function trackDynamicProperties( props, dynamicProps ) {
     const blockId = blockProps.clientId;
     const wrapperId = '#ec-store-block-' + blockId;
     
+    
     const storedData = jQuery(wrapperId).data('ec-store-block-stored-properties');
     
     let changed = false;
@@ -143,39 +144,83 @@ function trackDynamicProperties( props, dynamicProps ) {
         
         propValues[name] = blockProps.attributes[name];
     }
-    
+
+    // this weird condition takes place only on second edit. First one creates block div, so there is no block yet
+    // second call saves params, but there is no need to refresh, and at the same time stored props are not set
+    // thus we return false but save params
+    const secondEditCall = jQuery(wrapperId).length > 0 && !jQuery(wrapperId).data('ec-store-block-stored-properties');
+
     jQuery(wrapperId).data('ec-store-block-stored-properties', propValues);
-    
+
+    if ( secondEditCall ) {
+        return false;
+    }
+
     return changed;
+}
+
+function EcwidSingleProductBlock( props ) {
+    const blockProps = props.props;
+    const __attributeValues = blockProps.attributes;
+    const __attributesDefinition = props.attributes;
+    const blockId = blockProps.clientId;
+    const widget = props.widget;
+    const render = typeof props.render === 'undefined' ? true : props.render;
+    
+    const wrapperId = EcwidGutenberg.getWrapperId( blockId );
+    let wrapperClassName = 'ec-store-block ec-store-dynamic-block';
+    
+    if ( !__attributeValues.id || !render ) {
+        return <div id={ wrapperId } className={ wrapperClassName }>
+            { props.children }
+        </div>;
+    }
+    
+    let atts = {};
+    
+    for ( let name in __attributesDefinition ) {
+        if ( typeof (__attributeValues[name] ) === 'undefined' ) {
+            atts[name] = __attributesDefinition[name].default;
+        } else {
+            atts[name] = __attributeValues[name];
+        }
+    }
+    atts.id = __attributeValues.id;
+    
+    setTimeout( function() {
+        EcwidGutenberg.refresh()
+    });
+    
+    let widgetClassName = 'ecwid ecwid-SingleProduct-v2 ecwid-Product ecwid-Product-' + atts.id;
+
+    return <div id={ wrapperId } className={ wrapperClassName } data-attributes={ JSON.stringify(atts)} data-ec-store-widget="product" data-ec-store-block-id={ blockId }>
+        <div className={ widgetClassName } data-single-product-id={ atts.id } itemscope itemtype="https://schema.org/Product">
+            { atts.show_picture && <div itemprop="picture"></div> }
+            { atts.show_title && <div className="ecwid-title" itemprop="title"></div> }
+            { atts.show_price &&
+            <div itemtype="https://schema.org/Offer" itemscope itemprop="offers">
+                <div className="ecwid-productBrowser-price ecwid-price" itemprop="price"
+                     data-spw-price-location={ props.show_price_on_button ? 'button' : '' }></div>
+                <div itemprop="priceCurrency"></div>
+            </div>
+            }
+            { atts.show_options && <div customprop="options"></div> }
+            { atts.show_qty && <div customprop="qty"></div> }
+            { atts.show_addtobag && <div customprop="addtobag"></div> }
+        </div>
+    </div>
 }
 
 function EcwidProductBrowserBlock( props ) {
     
-
-    return <div className="ec-store-block ec-store-generic-block">
-
-        <div className="ec-store-block-header">
-            { props.icon }
-            { props.title }
-        </div>
-        <div className="ec-store-block-content">
-            { props.children }
-        </div>
-        { props.showDemoButton &&
-        <div>
-            <a className="button button-primary" href="admin.php?page=ec-store">{ __( 'Set up your store', 'ecwid-shopping-cart') }</a>
-        </div>
-        }
-    </div>
-
     const blockProps = props.props;
     const attributes = props.attributes;
     const blockId = blockProps.clientId;
     const showCats = blockProps.attributes.show_categories;
     const showSearch = blockProps.attributes.show_search;
-    const render = false; //typeof props.render === 'undefined' ? true : props.render;
+    const render = typeof props.render === 'undefined' ? true : props.render;
 
-    const wrapperId = 'ec-store-block-' + blockId;
+    const wrapperId = EcwidGutenberg.getWrapperId( blockId );
 
     let widget = "productbrowser";
     
@@ -233,14 +278,12 @@ function EcwidProductBrowserBlock( props ) {
         Ecwid.refreshConfig();
     }
     
-    if ( Ecwid && Ecwid.refreshConfig ) {
-        Ecwid.refreshConfig();
-    }
+    const alreadyRendered = jQuery('#' + wrapperId).attr('data-ec-')
     
     return <div 
             className={ className } 
             data-ec-store-widget={ widget } 
-            data-ec-store-id={ blockId } 
+            data-ec-store-block-id={ blockId } 
             data-ec-store-args={ args }
             data-ec-store-with-search={ showSearch }
             data-ec-store-with-categories={ showCats }
@@ -267,4 +310,4 @@ function EcwidImage( props ) {
     return <img src={ url } />
 }
 
-export { EcwidControls, EcwidInspectorSubheader, EcwidImage, EcwidProductBrowserBlock };
+export { EcwidControls, EcwidInspectorSubheader, EcwidImage, EcwidProductBrowserBlock, EcwidSingleProductBlock };

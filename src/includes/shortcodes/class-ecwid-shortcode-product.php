@@ -108,7 +108,6 @@ class Ecwid_Shortcode_Product extends Ecwid_Shortcode_Base {
 	}
 
 	protected function _get_widget_parts_v2() {
-		$price_location_attributes = '  data-spw-price-location="button"';
 
 		$main_div_classes = array(
 		    'ecwid',
@@ -118,7 +117,6 @@ class Ecwid_Shortcode_Product extends Ecwid_Shortcode_Base {
         );
 
 		if ($this->_params['show_border'] != 0) { // defaults to 1
-			$bordered_class = '';
 			$main_div_classes[] = 'ecwid-SingleProduct-v2-bordered';
 		}
 
@@ -128,16 +126,14 @@ class Ecwid_Shortcode_Product extends Ecwid_Shortcode_Base {
 
         $main_div_class = implode( ' ', $main_div_classes );
 
-		if ($this->_params['show_price_on_button'] == 0) { // defaults to 1
-			$price_location_attributes = '';
-		}
-
+		$price_location = $this->_params['show_price_on_button'] == 1 ? 'button' : '';
+		
 		return array(
 			'display_items' => array(
 				'picture'  => '<div itemprop="picture"></div>',
 				'title'    => '<div class="ecwid-title" itemprop="title"></div>',
 				'price'    => '<div itemtype="http://schema.org/Offer" itemscope itemprop="offers">'
-				              . '<div class="ecwid-productBrowser-price ecwid-price" itemprop="price"' . $price_location_attributes . '>'
+				              . '<div class="ecwid-productBrowser-price ecwid-price" itemprop="price" data-spw-price-location="' . $price_location . '">'
 				              . '<div itemprop="priceCurrency"></div>'
 				              . '</div>'
 				              . '</div>',

@@ -57,7 +57,8 @@ class Ecwid_Gutenberg {
 			'widgetsMap' => array(
 				'productbrowser' => 'ProductBrowser',
 				'categories' => 'CategoriesV2',
-				'search' => 'SearchWidget'
+				'search' => 'SearchWidget',
+				'product' => 'Product'
 			)
 		));
 		EcwidPlatform::enqueue_style( 'store-popup' );

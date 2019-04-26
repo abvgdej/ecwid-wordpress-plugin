@@ -9,7 +9,8 @@
 //  Import CSS.
 import './style.scss';
 import './editor.scss';
-import {EcwidIcons} from '../icons.js';
+import { EcwidIcons } from '../icons.js';
+import { EcwidSingleProductBlock } from '../includes/controls.js';
 
 if ( !EcwidGutenbergParams.isDemoStore ) {
 
@@ -34,6 +35,18 @@ const {
     Fragment
 } = wp.element;
 
+const productAttributes = {
+    id: {type: 'integer'},
+    show_picture: {type: 'boolean', default: true},
+    show_title: {type: 'boolean', default: true},
+    show_price: {type: 'boolean', default: true},
+    show_options: {type: 'boolean', default: true},
+    show_qty: {type: 'boolean', default: false},
+    show_addtobag: {type: 'boolean', default: true},
+    show_price_on_button: {type: 'boolean', default: true},
+    show_border: {type: 'boolean', default: true},
+    center_align: {type: 'boolean', default: true}
+};
 
 /**
  * Register: aa Gutenberg Block.
@@ -52,18 +65,7 @@ registerBlockType( 'ecwid/product-block', {
 	title: __( 'Product card small', 'ecwid-shopping-cart' ), // Block title.
 	icon: EcwidIcons.product, 
 	category: 'ec-store', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
-    attributes: {
-        id: {type: 'integer'},
-        show_picture: {type: 'boolean', default: true},
-        show_title: {type: 'boolean', default: true},
-        show_price: {type: 'boolean', default: true},
-        show_options: {type: 'boolean', default: true},
-        show_qty: {type: 'boolean', default: false},
-        show_addtobag: {type: 'boolean', default: true},
-        show_price_on_button: {type: 'boolean', default: true},
-        show_border: {type: 'boolean', default: true},
-        center_align: {type: 'boolean', default: true}
-    },
+    attributes: productAttributes,
 	description: __( 'Display product with a buy button', 'ecwid-shopping-cart' ),
     alignWide: false,
     supports: {
@@ -100,19 +102,8 @@ registerBlockType( 'ecwid/product-block', {
             params.originalProps.setAttributes(attributes);
         }
 		
-        const editor = <div className="ec-store-block ec-store-block-product">
-			{ EcwidGutenbergParams.products && attributes.id && EcwidGutenbergParams.products[attributes.id] &&
-			<div className="ec-store-block-image">
-				<img src={ EcwidGutenbergParams.products[attributes.id].imageUrl }/>
-			</div>
-            }
-            
-			{ EcwidGutenbergParams.products && attributes.id && EcwidGutenbergParams.products[attributes.id] &&
-			<div className="ec-store-product-title">
-				{ EcwidGutenbergParams.products[attributes.id].name }
-			</div>
-            }
-
+        const editor = 
+            <EcwidSingleProductBlock props={ props } attributes={ productAttributes } widget="product" render={ attributes.id }>
             { !attributes.id &&
             <div className="ec-store-block-product-preview">
                 { EcwidIcons.productPreview }
@@ -124,9 +115,8 @@ registerBlockType( 'ecwid/product-block', {
                 <button className="button ec-store-block-button" onClick={ () => { var params = {'saveCallback':saveCallback, 'props': props}; ecwid_open_product_popup( params ); } }>{ EcwidGutenbergParams.chooseProduct }</button> 
             </div>
             }
-			
-		</div>;
-
+        </EcwidSingleProductBlock>;
+         
         function buildToggle(props, name, label) {
             return <ToggleControl
 				label={ label }

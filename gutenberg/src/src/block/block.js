@@ -75,7 +75,7 @@ registerBlockType( 'ecwid/store-block', {
                 attributes={ blockParams.attributes }
                 props={ props } 
                 icon={ EcwidIcons.store } 
-                title={ __( 'Store Home Page') } 
+                title={ __( 'Store Home Page', 'ecwid-shopping-cart' ) } 
                 showDemoButton={ blockParams.isDemoStore }>
                 <div className="ec-store-products">
                     <div className="ec-store-product1"></div>
