@@ -241,6 +241,20 @@ add_action('wp_ajax_nopriv_ecwid_test', function(){
 	error_log( json_encode($_REQUEST) );
 });
 
+
+add_filter( 'woocommerce_get_cart_url', function( $url ){
+	return Ecwid_Store_Page::get_cart_url();
+});
+
+add_filter( 'woocommerce_get_checkout_url', function( $url ){
+	return Ecwid_Store_Page::get_store_url() . 'checkout/payment';
+});
+
+
+// setInterval > ajax > get cart info
+// Ecwid.Cart.addProduct(133599082);
+
+
 /*
 # JS for CP
 EcwidControlPanel.onSavePageData(function(){
