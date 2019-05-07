@@ -99,12 +99,20 @@ jQuery(document).ready(function() {
                 
                 addWidget( 'ec-store-block-productbrowser-' + id, widget, args.split(',') );
                 oldChildren.remove();
+                
             } else if ( widget === 'product' ) {
 
-                let atts = JSON.parse(jQuery(this).attr('data-attributes'));
+                var atts = JSON.parse(jQuery(this).attr('data-attributes'));
+
+                jQuery( '#ec-store-block-' + id ).find('.ecwid.loaded').remove();
+                var oldChildren = jQuery( '#ec-store-block-' + id ).children();
+
+                var oldProductContainer = oldChildren.eq(0);
                 
-                let clone = oldChildren.clone();
-                clone.eq(0).attr('id', 'ec-store-block-product-' + id);
+                var clone = oldChildren.clone().show();
+                var newProductContainer = clone.eq(0).attr('data-single-product-id', atts.id);
+                
+                newProductContainer.attr('id', 'ec-store-block-product-' + id);
                 jQuery(this).append(clone);
 
                 allBlocks[allBlocks.length] = {
@@ -112,8 +120,9 @@ jQuery(document).ready(function() {
                     id: widgetId,
                     arg: ["id=" + atts.id]
                 };
-                oldChildren.eq(0).removeClass('ecwid ecwid-Product ecwid-SingleProduct-v2').hide();
-
+                oldProductContainer
+                    .removeClass('ecwid ecwid-Product ecwid-SingleProduct-v2')
+                    .removeAttr('data-single-product-id').hide();
                 /*
                 addWidget( 'ec-store-block-product-' + id, widget, ["id=" + atts.id] );
                 /*

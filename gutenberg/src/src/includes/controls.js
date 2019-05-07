@@ -120,10 +120,19 @@ function EcwidInspectorSubheader(title) {
     </div>
 };
 
-function trackDynamicProperties( props, dynamicProps ) {
+function trackChangedProperties( props, dynamicProps ) {
     
     const blockProps = props.props;
-    const dynamicProperties = dynamicProps.split(' ');
+    
+    let dynamicProperties = [];
+    
+    if ( !dynamicProps ) {
+        for ( let i in blockProps.attributes ) {
+            dynamicProperties[dynamicProperties.length] = i;
+        }
+    } else {
+        dynamicProperties = dynamicProps.split(' ');
+    }    
     
     const blockId = blockProps.clientId;
     const wrapperId = '#ec-store-block-' + blockId;
@@ -186,21 +195,37 @@ function EcwidSingleProductBlock( props ) {
         }
     }
     atts.id = __attributeValues.id;
+
+    let changed = trackChangedProperties( props );
     
-    setTimeout( function() {
-        EcwidGutenberg.refresh()
-    });
+    if ( render && changed ) {
+
+        document.getElementById(wrapperId)
+        && document.getElementById(wrapperId).removeAttribute('data-ec-store-rendered');
+
+        setTimeout( function() {
+            EcwidGutenberg.refresh()
+        });
+    }
     
     let widgetClassName = 'ecwid ecwid-SingleProduct-v2 ecwid-Product ecwid-Product-' + atts.id;
 
-    return <div id={ wrapperId } className={ wrapperClassName } data-attributes={ JSON.stringify(atts)} data-ec-store-widget="product" data-ec-store-block-id={ blockId }>
+    if ( atts.show_border ) {
+        widgetClassName += ' ecwid-SingleProduct-v2-bordered';
+    }
+    
+    if ( atts.center_align ) {
+        widgetClassName += ' ecwid-SingleProduct-v2-centered';
+    }
+    
+    return <div id={ wrapperId } className={ wrapperClassName } data-attributes={ JSON.stringify(atts) } data-ec-store-widget="product" data-ec-store-block-id={ blockId }>
         <div className={ widgetClassName } data-single-product-id={ atts.id } itemscope itemtype="https://schema.org/Product">
             { atts.show_picture && <div itemprop="picture"></div> }
             { atts.show_title && <div className="ecwid-title" itemprop="title"></div> }
             { atts.show_price &&
             <div itemtype="https://schema.org/Offer" itemscope itemprop="offers">
                 <div className="ecwid-productBrowser-price ecwid-price" itemprop="price"
-                     data-spw-price-location={ props.show_price_on_button ? 'button' : '' }></div>
+                     data-spw-price-location={ atts.show_price_on_button ? 'button' : '' }></div>
                 <div itemprop="priceCurrency"></div>
             </div>
             }
@@ -245,7 +270,7 @@ function EcwidProductBrowserBlock( props ) {
         className += " ec-store-with-search";
     }
 
-    let changed = trackDynamicProperties( props, "default_product_id default_category_id show_search show_categories" );
+    let changed = trackChangedProperties( props, "default_product_id default_category_id show_search show_categories" );
 
     if ( render && changed ) {
         
