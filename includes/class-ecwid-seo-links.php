@@ -445,16 +445,23 @@ JS;
 	
 	protected static function _get_relative_permalink( $item_id ) {
 		
-		$permalink = get_permalink( $item_id );
-		$home_url = home_url();
-		$default_link = substr( $permalink, strlen( $home_url ) );
+		$permalink = parse_url( get_permalink( $item_id ) );
+		$home_url = parse_url( home_url() );
 		
+		if( isset($home_url['query']) ) {
+			$home_url['path'] = substr( $home_url['path'], 0, -1 );
+		}
+		
+		$default_link = substr( $permalink['path'], strlen( $home_url['path'] ) );
+
 		if ( !is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
 			return $default_link;
 		}
 
 		try {  
 			global $sitepress;
+
+			$link = $default_link;
 
 			if ( $sitepress->get_setting( 'language_negotiation_type' ) == WPML_LANGUAGE_NEGOTIATION_TYPE_DIRECTORY ) {
 
