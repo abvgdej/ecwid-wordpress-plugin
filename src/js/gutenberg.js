@@ -66,6 +66,8 @@ jQuery(document).ready(function() {
     
     EcwidGutenberg.refresh = function() {
         var allBlocks = [];
+
+        var alreadyHasPB = false;
         jQuery('.ec-store-dynamic-block:not([data-ec-store-rendered=true])').each(function() {
             
             var $that = jQuery(this);
@@ -89,16 +91,29 @@ jQuery(document).ready(function() {
             var oldChildren = jQuery( '#ec-store-block-' + id ).children();
 
             if ( widget == 'productbrowser' ) {
-                if ( jQuery(this).hasClass('ec-store-with-search') ) {
-                    addWidget( 'ec-store-block-search-' + id, 'search', [] );    
-                }
                 
-                if ( jQuery(this).hasClass('ec-store-with-categories') ) {
-                    addWidget( 'ec-store-block-categories-' + id, 'categories', [] );
+                debugger;
+                if ( !alreadyHasPB ) {
+                    if ( jQuery(this).hasClass('ec-store-with-search') ) {
+                        addWidget( 'ec-store-block-search-' + id, 'search', [] );    
+                    }
+                    
+                    if ( jQuery(this).hasClass('ec-store-with-categories') ) {
+                        addWidget( 'ec-store-block-categories-' + id, 'categories', [] );
+                    }
+                    
+                    addWidget( 'ec-store-block-productbrowser-' + id, widget, args.split(',') );
+                    oldChildren.remove();
+                    
+                    alreadyHasPB = true;
+                } else {
+                    jQuery( '#ec-store-block-' + id )
+                        .attr('data-ec-store-rendered', true)
+                        .css('outline', '3px solid red')
+                        .find('.ec-store-block-header')
+                        .append(' - [CANT HAVE MORE PRODUCT BROWSERS]');
+                    return;
                 }
-                
-                addWidget( 'ec-store-block-productbrowser-' + id, widget, args.split(',') );
-                oldChildren.remove();
                 
             } else if ( widget === 'product' ) {
 
@@ -159,6 +174,25 @@ jQuery(document).ready(function() {
         if (allBlocks.length > 0) {
             if (Ecwid && Ecwid.destroy) {
                 Ecwid.destroy();
+            }
+            
+            var alreadyHasPB = false;
+            var excessivePBs = [];
+            for ( var i = 0; i < allBlocks.length; i++ ) {
+                var widgetType = allBlocks[i].widgetType;
+                if (widgetType == 'productbrowser') {
+                    if (!alreadyHasPB) {
+                        alreadyHasPB = true;
+                    } else {
+                        excessivePBs[excessivePBs.length] = i;
+                    }
+                }
+            }
+            
+            for ( var i = excessivePBs.length - 1; i >= 0; i-- ) {
+                id = allBlocks[i].id;
+                jQuery('#' + id).css('outline', '3px solid red');
+                allBlocks.splice(i, 1);
             }
             
             window._xnext_initialization_scripts = allBlocks;

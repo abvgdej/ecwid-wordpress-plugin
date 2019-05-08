@@ -280,24 +280,32 @@ function EcwidProductBrowserBlock( props ) {
         setTimeout( function() {
             EcwidGutenberg.refresh()
         });
+        
+        if ( props.openPage ) {
+            Ecwid.OnPageLoaded.add(function() {
+                Ecwid.openPage(props.openPage);
+            })
+        }
     }
 
     window.ec.config.chameleon.colors = [];
 
-    Object.keys( attributes ).map( (i) => {
-        let attr = attributes[i];
-
-        let value = typeof blockProps.attributes[attr.name] !== 'undefined' ? 
-            blockProps.attributes[attr.name] : attributes.default;
-        
-        if ( i.indexOf('chameleon') !== -1 ) {
-            if ( value ) {
-                window.ec.config.chameleon.colors['color-' + i.substr(16)] = value;
-            } 
-        } else {
-            window.ec.storefront[attr.name] = value;
-        }
-    });
+    if ( typeof attributes  === 'object' ) {
+        Object.keys( attributes ).map( (i) => {
+            let attr = attributes[i];
+    
+            let value = typeof blockProps.attributes[attr.name] !== 'undefined' ? 
+                blockProps.attributes[attr.name] : attributes.default;
+            
+            if ( i.indexOf('chameleon') !== -1 ) {
+                if ( value ) {
+                    window.ec.config.chameleon.colors['color-' + i.substr(16)] = value;
+                } 
+            } else {
+                window.ec.storefront[attr.name] = value;
+            }
+        });
+    }
 
     if ( Ecwid && Ecwid.refreshConfig ) {
         Ecwid.refreshConfig();
