@@ -331,7 +331,7 @@ HTML
 
 		switch ($name) {
 			case 'on_woo_detected':
-				return is_admin() && !is_plugin_active( 'woocommerce/woocommerce.php' ) && apply_filters('ecwid_woocommerce_detect_hook', false);
+				return is_admin() && !is_plugin_active( 'woocommerce/woocommerce.php' )  && !is_plugin_active( 'forkcommerce/forkcommerce.php' ) && apply_filters('ecwid_woocommerce_detect_hook', false);
 
 			case 'on_activate':
 				return !$this->should_display_on_no_storeid_on_setup_pages() && $admin_page != 'toplevel_page_ec-store' && ecwid_is_demo_store();

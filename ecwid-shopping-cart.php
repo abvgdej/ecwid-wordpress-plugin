@@ -244,7 +244,10 @@ add_filter( 'woocommerce_get_checkout_url', function( $url ){
 	return Ecwid_Store_Page::get_store_url() . 'checkout/payment';
 });
 
-add_action( 'wp_ajax_ecwid_get_wc_cart', function(){
+// add_action( 'wp_ajax_ecwid_get_wc_cart', 'ecwid_get_wc_cart' );
+
+
+function ecwid_get_wc_cart() {
 	global $woocommerce;
     $items = $woocommerce->cart->get_cart();
 
@@ -254,19 +257,44 @@ add_action( 'wp_ajax_ecwid_get_wc_cart', function(){
     		'count' => $item['quantity']
     	);
     }
-
-	// print_r( $items );
-
-	wp_send_json( array('status' => 'success', 'cart' => $result) );
-});
+    return $result;
+	// wp_send_json( array('status' => 'success', 'cart' => $result) );
+}
 
 add_action( 'wp_footer', function(){
+
+	// var_dump( ecwid_get_wc_cart() );
+
+	$cart_json = json_encode( ecwid_get_wc_cart() );
+
 	echo <<<HTML
 		<script type="text/javascript">
 		if( typeof Ecwid != 'undefined' ) {
-			Ecwid.OnPageLoad.add(function(page) {
-				if( page.TYPE == 'cart' ) {
+			Ecwid.OnApiLoad.add(function(page) {
+				// if( page.type == 'CART' ) {
+					Ecwid.Cart.clear();
+					
+					var cart = '$cart_json';
 
+					jQuery.each( cart, function( index, value ){
+						// Ecwid.Cart.addProduct({
+						// 	id: parseInt(value.id),
+						// 	quantity: parseInt(value.count)
+						// });
+					});
+					
+			// 	}
+			});
+		}
+		</script>>
+HTML;
+
+	/*echo <<<HTML
+		<script type="text/javascript">
+		if( typeof Ecwid != 'undefined' ) {
+			Ecwid.OnPageLoad.add(function(page) {
+
+				if( page.type == 'CART' ) {
 					// setInterval(function(){
 						Ecwid.Cart.clear();
 						
@@ -283,12 +311,12 @@ add_action( 'wp_footer', function(){
 							}
 						);
 					// }, 5000);
-
 				}
+
 			});
 		}
 		</script>>
-HTML;
+HTML;*/
 });
 
 
