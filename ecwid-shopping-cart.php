@@ -260,6 +260,7 @@ add_filter( 'woocommerce_get_checkout_url', function( $url ){
 function ecwid_get_wc_cart() {
 	global $woocommerce;
     $items = $woocommerce->cart->get_cart();
+    $result = array();
 
     foreach ($items as $item) {
     	$result[] = array(
@@ -272,35 +273,64 @@ function ecwid_get_wc_cart() {
 
 // Добавление woo корзины в ecwid корзину
 add_action( 'wp_footer', function(){
+
+	if( !ecwid_get_wc_cart() )
+		return;
+
 	$cart_json = json_encode( ecwid_get_wc_cart() );
 	echo <<<HTML
 		<script type="text/javascript">
 
 		if( typeof Ecwid != 'undefined' ) {
 			Ecwid.OnPageLoaded.add(function(page) {
-				Ecwid.Cart.clear();					
-				var woo_cart = JSON.parse('$cart_json');
-				jQuery.each( woo_cart, function( index, value ){
-					Ecwid.Cart.addProduct({
-						id: parseInt(value.id),
-						quantity: parseInt(value.count)
+
+				console.log( page );
+				if( page.type == 'CART' ) {
+					Ecwid.Cart.clear();
+					var woo_cart = JSON.parse('$cart_json');
+
+					jQuery.each( woo_cart, function( index, value ){
+						Ecwid.Cart.addProduct({
+							id: parseInt(value.id),
+							quantity: parseInt(value.count)
+						});
 					});
-				});
+				}
 			});
+
+			Ecwid.OnOrderPlaced.add(function(order){
+				jQuery.get('?clear-cart');
+			});
+
 		}
 		</script>>
 HTML;
 });
 
+// очистака корзины
+add_action( 'init', 'woocommerce_clear_cart_url' );
+function woocommerce_clear_cart_url() {
+    if ( isset( $_GET['clear-cart'] ) ) {
+        global $woocommerce;
+        $woocommerce->cart->empty_cart();
+    }
+}
 
-/*
-# JS for CP
-EcwidControlPanel.onSavePageData(function(){
+// синхронизация товаров
+function ecwid_sync_fork_products() {
+	$api = new Ecwid_Api_V3();
+	$stats = $api->get_store_update_stats();
 
-	$.get('http://localhost:8888/wp-dev/wp-admin/admin-ajax.php?action=ecwid_test&id=' + $('#productId_gwt-uid-1390').val())
+	error_log( 'sync' );
 
-});
-*/
+	Ecwid_Products_Sync_Status::reset_dates();
+	$p = new Ecwid_Products();
+	$p->sync();
+}
+
+add_action( 'sync_fork_products_action_hook', 'ecwid_sync_fork_products' );
+
+wp_schedule_single_event( time() + 30, 'sync_fork_products_action_hook', array( time() ) );
 
 /*
 * # fork woo 
