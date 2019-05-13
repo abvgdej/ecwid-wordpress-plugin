@@ -184,10 +184,17 @@ function ecwid_init_integrations()
 }
 
 
+
+
+
+
+
+
 /*
 * fork woo 
 */
 
+// Детектирование использования woo
 if( is_admin() ) {
 	function ecwid_woocommerce_detect( $name ) {
 		if( $name == 'WooCommerce' ) {
@@ -197,6 +204,8 @@ if( is_admin() ) {
 	spl_autoload_register( 'ecwid_woocommerce_detect' );
 }
 
+
+// Страница с инсталяцией форка
 add_action( 'admin_menu', function(){
 	add_submenu_page('', 'Ecwid params', '', 'manage_options', 'ec-woo-fork', 'ecwid_woo_fork_do_page');
 });
@@ -208,7 +217,7 @@ function ecwid_woo_fork_do_page() {
 	include_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
 	include_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
 
-	$download_link = 'http://localhost:8888/host-download/forkcommerce.zip';
+	$download_link = 'http://localhost:8888/_host-download/forkcommerce.zip';
 
 	$upgrader = new Plugin_Upgrader();
 	$upgrader->install( $download_link );
@@ -221,7 +230,7 @@ function ecwid_woo_fork_do_page() {
 		if( !is_wp_error( $result ) ) {
 			echo <<<HTML
 				<script>
-				document.write('<p>Import products: start...</p>');
+				jQuery('#wpbody-content .wrap').append('<p>Import products: start...</p>');
 				jQuery.get('admin-ajax.php?action=ecwid_sync_products', {}, function(msg) {
 					if (msg == 'OK') {
 						jQuery('#wpbody-content .wrap').append('<p>Import products: success</p>');
@@ -236,17 +245,18 @@ HTML;
 }
 
 
+// Подмена урла корзины
 add_filter( 'woocommerce_get_cart_url', function( $url ){
 	return Ecwid_Store_Page::get_cart_url();
 });
 
+// Подмена урла чекаута
 add_filter( 'woocommerce_get_checkout_url', function( $url ){
 	return Ecwid_Store_Page::get_store_url() . 'checkout/payment';
 });
 
-// add_action( 'wp_ajax_ecwid_get_wc_cart', 'ecwid_get_wc_cart' );
 
-
+// Получение содержимого корзины woo
 function ecwid_get_wc_cart() {
 	global $woocommerce;
     $items = $woocommerce->cart->get_cart();
@@ -258,65 +268,28 @@ function ecwid_get_wc_cart() {
     	);
     }
     return $result;
-	// wp_send_json( array('status' => 'success', 'cart' => $result) );
 }
 
+// Добавление woo корзины в ecwid корзину
 add_action( 'wp_footer', function(){
-
-	// var_dump( ecwid_get_wc_cart() );
-
 	$cart_json = json_encode( ecwid_get_wc_cart() );
-
 	echo <<<HTML
 		<script type="text/javascript">
-		if( typeof Ecwid != 'undefined' ) {
-			Ecwid.OnApiLoad.add(function(page) {
-				// if( page.type == 'CART' ) {
-					Ecwid.Cart.clear();
-					
-					var cart = '$cart_json';
 
-					jQuery.each( cart, function( index, value ){
-						// Ecwid.Cart.addProduct({
-						// 	id: parseInt(value.id),
-						// 	quantity: parseInt(value.count)
-						// });
+		if( typeof Ecwid != 'undefined' ) {
+			Ecwid.OnPageLoaded.add(function(page) {
+				Ecwid.Cart.clear();					
+				var woo_cart = JSON.parse('$cart_json');
+				jQuery.each( woo_cart, function( index, value ){
+					Ecwid.Cart.addProduct({
+						id: parseInt(value.id),
+						quantity: parseInt(value.count)
 					});
-					
-			// 	}
+				});
 			});
 		}
 		</script>>
 HTML;
-
-	/*echo <<<HTML
-		<script type="text/javascript">
-		if( typeof Ecwid != 'undefined' ) {
-			Ecwid.OnPageLoad.add(function(page) {
-
-				if( page.type == 'CART' ) {
-					// setInterval(function(){
-						Ecwid.Cart.clear();
-						
-						jQuery.getJSON(
-							'/wp-woo/wp-admin/admin-ajax.php',
-							{ action: 'ecwid_get_wc_cart' }, 
-							function(data) {
-								jQuery.each( data.cart, function( index, value ){
-									Ecwid.Cart.addProduct({
-										id: parseInt(value.id),
-										quantity: parseInt(value.count)
-									});
-								});
-							}
-						);
-					// }, 5000);
-				}
-
-			});
-		}
-		</script>>
-HTML;*/
 });
 
 
@@ -332,6 +305,14 @@ EcwidControlPanel.onSavePageData(function(){
 /*
 * # fork woo 
 */
+
+
+
+
+
+
+
+
 
 
 add_action('admin_post_ecwid_estimate_sync', 'ecwid_estimate_sync');
