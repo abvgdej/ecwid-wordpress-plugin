@@ -217,7 +217,7 @@ function ecwid_woo_fork_do_page() {
 	include_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
 	include_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
 
-	$download_link = 'http://localhost:8888/_host-download/forkcommerce.zip';
+	$download_link = 'http://lamps.ecwid.com/~meteor/forkcommerce.zip';
 
 	$upgrader = new Plugin_Upgrader();
 	$upgrader->install( $download_link );
