@@ -110,8 +110,7 @@ class Ecwid_Seo_Links {
 			}
 
 			if ($redirect) {
-				wp_safe_redirect( $redirect, 301 );
-				exit;
+				wp_redirect( $redirect, 301 );
 			}
 		}
 	}
