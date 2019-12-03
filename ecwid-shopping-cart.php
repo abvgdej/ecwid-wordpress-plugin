@@ -5,7 +5,7 @@ Plugin URI: http://www.ecwid.com?source=wporg
 Description: Ecwid is a free full-featured shopping cart. It can be easily integrated with any Wordpress blog and takes less than 5 minutes to set up.
 Text Domain: ecwid-shopping-cart
 Author: Ecwid Ecommerce
-Version: 6.8.7
+Version: 6.8.8
 Author URI: https://ecwid.to/ecwid-site
 */
 
@@ -146,6 +146,8 @@ require_once ECWID_PLUGIN_DIR . 'lib/ecwid_category.php';
 require_once ECWID_PLUGIN_DIR . 'includes/class-ecwid-seo-links.php';
 require_once ECWID_PLUGIN_DIR . 'includes/class-ecwid-html-meta.php';
 require_once ECWID_PLUGIN_DIR . 'includes/class-ecwid-wp-dashboard-feed.php';
+
+require_once ECWID_PLUGIN_DIR . 'includes/class-ecwid-well-known.php';
 
 if (version_compare( phpversion(), '5.6', '>=' ) ) {
 	require_once ECWID_PLUGIN_DIR . 'includes/importer/importer.php';
@@ -1026,6 +1028,8 @@ function ecwid_full_cache_reset()
 	EcwidPlatform::cache_reset( 'all_categories' );
 	EcwidPlatform::cache_reset( 'nav_categories_posts' );
 
+	Ecwid_Static_Page::clear_all_cache();
+
 	$p = new Ecwid_Products();
 	$p->reset_dates();
 	
@@ -1793,6 +1797,8 @@ function ecwid_uninstall() {
 	delete_option("ecwid_plugin_version");
 	delete_option("ecwid_use_chameleon");
 	delete_option(Ecwid_Api_V3::TOKEN_OPTION_NAME);
+
+	EcwidPlatform::cache_reset('need_add_rewrite');
 }
 
 function ecwid_abs_intval($value) {
@@ -2216,7 +2222,7 @@ function ecwid_create_store() {
 		ecwid_update_store_id($data->id);
 
 		$api->save_token( $data->token );
-		update_option( 'ecwid_oauth_scope', 'read_profile ' . Ecwid_OAuth::SCOPE_READ_CATALOG . ' allow_sso create_customers public_storefront' );
+		update_option( 'ecwid_oauth_scope', 'read_profile ' . Ecwid_OAuth::SCOPE_READ_CATALOG . ' create_catalog update_catalog allow_sso create_customers public_storefront' );
 
 		header( 'HTTP/1.1 200 OK' );
 
