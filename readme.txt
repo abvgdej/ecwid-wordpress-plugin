@@ -3,7 +3,7 @@ Contributors: Ecwid
 Tags: ecommerce, e-commerce, storefront, online store, sell
 Requires at least: 3.7
 Tested up to: 5.3
-Stable tag: 6.8.9
+Stable tag: 6.8.11
 
 Powerful, easy to use ecommerce shopping cart. Sell on Facebook and Instagram. iPhone & Android apps. Superb support. Free plan available.
 
@@ -153,9 +153,17 @@ You can add the store categories menu to your site menu to help your customers e
 You can use Ecwid’s built-in import tools to copy your store products from any other shopping cart to Ecwid. Find more details in the [Import-Export article in the Ecwid shopping cart help center](  https://support.ecwid.com/hc/en-us/articles/360000049040-Migrating-to-Ecwid-from-WooCommerce).
 
 
-* [Ecwid Help Center](http://help.ecwid.com/?source=wporg-plugin-site "Ecwid Help")
+* [Ecwid Help Center](http://help.ecwid.com "Ecwid Help")
 
 == Changelog == 
+= 6.8.11 - Dec 30, 2019 =
+- Fixed a PHP error message (“Class 'Ecwid_Import_Page' not found“) for PHP versions older 5.5. If your ecommerce site is running on an outdated PHP version, this update might fix a error message for you. Please update your PHP as soon as possible (or ask your hoster to do that for you) — it’s much more secure to use the latest versions of software on your server.
+
+= 6.8.10 - Dec 26, 2019 =
+- **Several fixes and improvements for the "Import from WooCommerce" tool.** The import tool now works faster and has a neat interface. 
+- **Improved compatibility with popular WordPress cache plugins**. The Ecwid ecommerce plugin now works better on sites with WP Super Cache, Autoptimize and WP-Rocket. If you have one of those plugins installed and noticed any issue, it should be fixed now. If you still see a problem, please let us know. 
+- Minor fixes for improved compatiblity with the Elementor pagebuilder plugin. 
+
 = 6.8.9 - Dec 4, 2019 =
 - **Several fixes and improvements for the "Import from WooCommerce" tool.** If you import your products from WooCommerce to Ecwid, the import process now should work faster. We also added import of product sale prices from WooCommerce import "Sale Price". In the storefront, this price will be struck out to demonstrate the discount and the ON SALE label will appear on the product.
 - Avada, SimplyNews, Twenty Twenty themes improved compatibility. Even though Ecwid is compatible with every WordPress theme by design, some slight fixes and improvements are sometimes needed to make storefront look better. That’s why we are always monitoring how Ecwid pages look and behave in WordPress ecommerce themes.
@@ -250,7 +258,7 @@ You can use Ecwid’s built-in import tools to copy your store products from any
 - **Added compatibility with the Enfold theme page builder (Avia Layout Builder)**. We learned that Ecwid didn't work well with the Avia page builder which is a part of the Enfold theme. Enfold users might notice it was difficult to add Ecwid blocks to a page. We fixed that — now Ecwid should work fine with Enfold theme.
 - **Added Mega Menu plugin compatibility**. Added fixes and layout improvements to make the Ecwid e-commerce plugin compatible with the Mega Menu WordPress plugin. If you use the Mega Menu plugin, you might notice layout issues on your store page. We fixed that. If you find any trouble in how Ecwid works with your theme or plugin, please let us know.
 - Minor fixes for the "Import products from WooCommerce to Ecwid" import tool.
-- Ecwid is constantly updated with new features and tools which are of course available to WordPress users. One of the recent major updates is Dynamic AMP emails: we’ve collaborated with Google/Gmail to launch dynamic email for e-commerce merchants. It's available for the Ecwid plugin users now and you will be able to use it without dealing with custom code or any external plugin. Check it out in our [blog](https://www.ecwid.com/blog/e-commerce-email). 
+- Ecwid is constantly updated with new features and tools which are of course available to WordPress users. One of the recent major updates is Dynamic AMP emails: we’ve collaborated with Google/Gmail to launch dynamic email for e-commerce merchants. It's available for the Ecwid plugin users now and you will be able to use it without dealing with custom code or any external plugin. Check it out in our [blog](https://www.ecwid.com/blog/e-commerce-email.html). 
 
 = 6.4.15 - Mar 19, 2019 =
 - Fixed generation of sitemap for Yoast SEO plugin
