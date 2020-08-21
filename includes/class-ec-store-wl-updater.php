@@ -40,26 +40,26 @@ class Ec_Store_WL_Updater
 			$res->name = $data->name;
 			$res->slug = $this->plugin_slug;
 			$res->version = $data->version;
-			$res->tested = $data->tested;
+			// $res->tested = $data->tested;
 			$res->requires = $data->requires;
-			$res->author = '<a href="https://shopsettings.com">Shopsettings.com</a>';
-			$res->author_profile = 'https://profiles.wordpress.org/ecwid';
+			// $res->author = '<a href="https://shopsettings.com">Shopsettings.com</a>';
+			// $res->author_profile = 'https://profiles.wordpress.org/ecwid';
 			$res->download_link = $data->download_url;
 			$res->trunk = $data->download_url;
-			$res->requires_php = '5.3';
-			$res->last_updated = $data->last_updated;
+			// $res->requires_php = $data->requires_php;
+			// $res->last_updated = $data->last_updated;
 			$res->sections = array(
-				'description' => $data->sections->description,
-				'installation' => $data->sections->installation,
+				// 'description' => $data->sections->description,
+				// 'installation' => $data->sections->installation,
 				'changelog' => $data->sections->changelog
 				// you can add your custom sections (tabs) here
 			);
 	 
 			// in case you want the screenshots tab, use the following HTML format for its content:
 			// <ol><li><a href="IMG_URL" target="_blank"><img src="IMG_URL" alt="CAPTION" /></a><p>CAPTION</p></li></ol>
-			if( !empty( $data->sections->screenshots ) ) {
-				$res->sections['screenshots'] = $data->sections->screenshots;
-			}
+			// if( !empty( $data->sections->screenshots ) ) {
+			// 	$res->sections['screenshots'] = $data->sections->screenshots;
+			// }
 
 			$res->banners = array(
 				'low' => $data->banners->low,
