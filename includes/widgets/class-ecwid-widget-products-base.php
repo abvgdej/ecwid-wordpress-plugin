@@ -57,7 +57,7 @@ abstract class Ecwid_Widget_Products_List_Base extends Ecwid_Widget_Base {
 		}
 	}
 
-	function _render_widget_content( $args, $instance ) {
+	public function _render_widget_content( $args, $instance ) {
 
 		$this->_args = $args;
 		$this->_instance = wp_parse_args( $instance, array( 'number_of_products' => $this->_default ) );

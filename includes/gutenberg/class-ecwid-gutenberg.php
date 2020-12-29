@@ -14,6 +14,7 @@ class Ecwid_Gutenberg {
 	const FILTERS_PAGE_BLOCK = 'ec-store/filters';
 	const SEARCH_BLOCK = 'ec-store/search';
 	const MINICART_BLOCK = 'ec-store/minicart';
+	const LATEST_PRODUCT_BLOCK = 'ec-store/latest-products';
 
 	public $_blocks = array();
 	
@@ -205,7 +206,7 @@ class Ecwid_Gutenberg {
 			'categories' => self::CATEGORIES_BLOCK,
 			'search' => self::SEARCH_BLOCK,
 			'minicart' => self::MINICART_BLOCK,
-			'cart-page' => self::CART_PAGE_BLOCK,
+			'latest-products' => self::LATEST_PRODUCT_BLOCK,
 		);
 
 		if( $return_with_pb_only == true ) {

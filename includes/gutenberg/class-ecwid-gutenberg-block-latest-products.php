@@ -10,7 +10,16 @@ class Ecwid_Gutenberg_Block_Latest_Products extends Ecwid_Gutenberg_Block_Base {
 		return Ecwid_Gutenberg_Block_Base::get_block_name();
 	}
 	
+	public function get_attributes_for_editor() {
+		$attributes = parent::get_attributes_for_editor();
+
+		return $attributes;
+	}
+
 	public function render_callback( $params ) {
+
+		require_once ECWID_PLUGIN_DIR . '/includes/widgets/class-ecwid-widget-base.php';
+		$ec_widget = new Ecwid_Widget_Latest_Products();
 
 		$params = wp_parse_args(
 			$params,
@@ -19,29 +28,14 @@ class Ecwid_Gutenberg_Block_Latest_Products extends Ecwid_Gutenberg_Block_Base {
 			)
 		);
 
-		$display = array(
-			'picture', 'title', 'price', 'options', 'qty', 'addtobag'
-		);
+		$contents = $ec_widget->_render_widget_content( array(), $params );
 
-		$params['display'] = '';
-		$display_string = '';
-		foreach ( $display as $name ) {
-			if ( @$params['show_' . $name] ) {
-				$params['display'] .= ' ' . $name;
-			}
-		}
-
-		$params['version'] = 2;
-
-		$shortcode = new Ecwid_Shortcode_Product( $params );
-
-		$contents = $shortcode->render();
 
 		$align = @$params['align'];
-		if ( $align == 'right' || $align == "left" ) {
-			$contents = '<div class="align' . $align . '">' . $contents . '</div>';
-		}
-		
+        if ( $align == 'right' || $align == "left" ) {
+            $contents = '<div class="align' . $align . '">' . $contents . '</div>';
+        }
+
 		return $contents;
 	}
 
